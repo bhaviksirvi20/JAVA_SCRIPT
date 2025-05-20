@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JavaScript History</title>
+    <link rel="shortcut icon" href="./png-clipart-javascript-html-logo-blog-css3-javanese-miscellaneous-angle-thumbnail-removebg-preview.png" type="image/x-icon">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #007acc, #a0c4ff);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007acc;
+            font-size: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        h1 img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: stretch;
+            /* ✅ Added: make text and image equal height */
+            gap: 30px;
+        }
+
+        .text-section {
+            flex: 1 1 300px;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #111;
+        }
+
+        .text-section p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .text-section img {
+            width: 22px;
+            height: 22px;
+        }
+        .p{
+            font-size: 25px;
+        }
+        .name{
+            overflow: hidden;
+        }
+        .image-section {
+            flex: 1 1 100px;
+            text-align: center;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .image-section:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-section p {
+            font-weight: bold;
+            margin: 10px 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* ---------- RESPONSIVE MEDIA QUERIES ---------- */
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .text-section {
+                font-size: 17px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .text-section {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 20px;
+                flex-direction: column;
+            }
+
+            .text-section {
+                font-size: 15px;
+            }
+
+            .image-section p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JS Logo" />
+            JavaScript ki Kahani
+        </h1><hr>
+
+        <div class="content">
+            <div class="text-section">
+
+                <div class="p">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JS Logo" />
+                <strong>JavaScript</strong> ka janm 1995 mein hua, jab 👨‍💼 <strong>Brendan Eich</strong> ne ise sirf
+                10 din mein <strong>Netscape</strong> company ke liye banaya.
+                Pehle iska naam <strong>Mocha</strong> tha, phir <strong>LiveScript</strong>, aur aakhir mein bana
+                <strong>JavaScript</strong> (📛 Java se koi lena dena nahi).
+                Iska main goal tha web pages ko 🖱️ <strong>interactive</strong> aur 🔄 <strong>dynamic</strong> banana.
+                1997 mein ye 🏢 <strong>ECMA International</strong> ke through <strong>ECMAScript</strong> standard
+                bana.
+                Aaj JavaScript duniya ki sabse 🔥 <strong>popular language</strong> hai – web, app, game, har jagah
+                chalti hai! 🌍🚀
+                </div>
+            </div>
+
+            <div class="image-section">
+                <div class="name">
+
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Brendan_Eich_Mozilla_Foundation_official_photo.jpg"
+                        alt="Brendan Eich" />
+                </div>
+                <p>👨‍💼 Brendan Eich<br />Founder of JavaScript</p>
+            </div>
+        </div>
+<hr>
+        <div class="footer">© Red & White Multimedia Education</div>
+    </div>
+</body>
+
+</html>
