@@ -41,7 +41,7 @@
     font-size: 44px;
     color: rgb(0, 79, 0);
   }
-  .top{
+  .top1{
     background-image: url(./Imges/1.png);
     background-position: center;
     background-size: contain;
@@ -50,7 +50,7 @@
 </style>
 
 <body>
-  <div class="h-[160%]  w-full text-5xl  font-bold bg-[#ffffff]  ">
+  <div class="h-[160%]  w-full text-5xl  font-bold bg-[#ffffff]  pb-10">
 
     <div class="nav h-[50px] w-auto bg-[#044423]  text-white flex justify-between px-20 items-center">
       <p><i class="ri-phone-line font-light "></i> +001234567890</p>
@@ -111,25 +111,25 @@
       <div class="hero h-40 w-full  flex justify-between items-center">
         <div class="button1 h-auto w-full flex items-center gap-5 ">
           <button
-            class="h-10 w-auto bg-gray-300 duration-500 hover:bg-white border-2 border-gray-300 rounded-[50px] gap-5 px-5">Headphone
+            class="h-10 w-auto bg-[#E5E7EB] duration-500 hover:bg-white border-2 border-[#E5E7EB] rounded-[50px] gap-5 px-5">Headphone
             Type <i class="ri-arrow-down-s-line"></i></button>
           <button
-            class="h-10 w-auto bg-gray-300 duration-500 hover:bg-white border-2 border-gray-300 rounded-[50px] gap-5 px-5">Price
+            class="h-10 w-auto bg-[#E5E7EB] duration-500 hover:bg-white border-2 border-[#E5E7EB] rounded-[50px] gap-5 px-5">Price
             <i class="ri-arrow-down-s-line"></i></button>
           <button
-            class="h-10 w-auto bg-gray-300 duration-500 hover:bg-white border-2 border-gray-300 rounded-[50px] gap-5 px-5">Review
+            class="h-10 w-auto bg-[#E5E7EB] duration-500 hover:bg-white border-2 border-[#E5E7EB] rounded-[50px] gap-5 px-5">Review
             <i class="ri-arrow-down-s-line"></i></button>
           <button
-            class="h-10 w-auto bg-gray-300 duration-500 hover:bg-white border-2 border-gray-300 rounded-[50px] gap-5 px-5">Color
+            class="h-10 w-auto bg-[#E5E7EB] duration-500 hover:bg-white border-2 border-[#E5E7EB] rounded-[50px] gap-5 px-5">Color
             <i class="ri-arrow-down-s-line"></i></button>
           <button
-            class="h-10 w-auto bg-gray-300 duration-500 hover:bg-white border-2 border-gray-300 rounded-[50px] gap-5 px-5">Material
+            class="h-10 w-auto bg-[#E5E7EB] duration-500 hover:bg-white border-2 border-[#E5E7EB] rounded-[50px] gap-5 px-5">Material
             <i class="ri-arrow-down-s-line"></i></button>
           <button
-            class="h-10 w-auto bg-gray-300 duration-500 hover:bg-white border-2 border-gray-300 rounded-[50px] gap-5 px-5">Offer
+            class="h-10 w-auto bg-[#E5E7EB] duration-500 hover:bg-white border-2 border-[#E5E7EB] rounded-[50px] gap-5 px-5">Offer
             <i class="ri-arrow-down-s-line"></i></button>
           <div
-            class="flex justify-between items-center h-10 w-auto bg-gray-300 duration-500 hover:bg-white border-2 border-gray-300 rounded-[50px] gap-5 px-5">
+            class="flex justify-between items-center h-10 w-auto bg-[#E5E7EB] duration-500 hover:bg-white border-2 border-[#E5E7EB] rounded-[50px] gap-5 px-5">
             <button class="">All Filters </button>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"
@@ -150,9 +150,7 @@
       <div class="hero h-32 w-full flex justify-start items-center ">
         <p class="p1 ">Headphone For You!</p>
       </div>
-      <div class="cards h-[530px] flex-wrap w-full flex justify-between items-center " id="cards">
-
-
+      <div class="cards h-[530px] flex-wrap w-full flex gap-24.5 items-center overflow-hidden" id="cards">
 
       </div>
     </div>
@@ -168,8 +166,9 @@
 
       card.innerHTML =
         `
-                 <div class="card h-full w-[100%] ">
-      <div class="top h-96 w-full relative bg-[#F6F7F2] overflow-hidden">
+                 <div class="card h-full w-[110%]">
+      <div class="top h-96 w-full flex justify-center items-center relative bg-[#F6F7F2]  overflow-hidden">
+        <div class="top1 h-78 w-78 "></div>
         <div
           class="like h-12 w-12 absolute right-0 top-0 m-5 bg-gray-300 rounded-full flex justify-center items-center">
            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">

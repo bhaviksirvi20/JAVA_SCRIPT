@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stylish Bike Collection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: #f0f0f0;
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #ffd369;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: #222831;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .card img {
+      width: 100%;
+      height: 450px;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-content {
+      padding: 20px;
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      color: #00adb5;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #ffd369;
+    }
+
+    .card button {
+      background: #00adb5;
+      color: #222831;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .card button:hover {
+      background: #ffd369;
+      color: #1f1c2c;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔥 Stylish Bike Collection 🔥</h1>
+  <div class="container" id="container"></div>
+
+  <script>
+    const container = document.getElementById("container");
+    const cardDetails = [
+      {
+        img: "https://i.pinimg.com/736x/a5/b9/6e/a5b96edd7d33f006007d53417899d170.jpg",
+        title: "Yamaha Classic",
+        description: "BS6 Impact: 6 Yamaha Bikes Discontinued in India",
+        price: "2,20,000",
+        button: "Buy Now"
+      },
+      {
+        img: "https://i.pinimg.com/736x/07/45/e3/0745e32144f00d467325c364dfa89c8b.jpg",
+        title: "Royal Enfield Classic",
+        description: "Iconic Royal Enfield Classic 350 in Black",
+        price: "1,90,000",
+        button: "Buy Now"
+      },
+      {
+        img: "https://i.pinimg.com/originals/dc/95/b2/dc95b22fd4ba68530a22f0891a7efcae.jpg",
+        title: "Continental GT 650",
+        description: "Royal Enfield Continental GT 650 - Cafe Racer",
+        price: "3,19,000",
+        button: "Buy Now"
+      },
+      {
+        img: "https://i.pinimg.com/originals/52/d9/d2/52d9d26c3e41e05344dcb6050fbf2e77.jpg",
+        title: "Vintage Bullet",
+        description: "Classic Royal Enfield Bullet Metal Plate Poster",
+        price: "1,50,000",
+        button: "Buy Now"
+      },
+      {
+        img: "https://i.pinimg.com/originals/ec/40/3d/ec403dd9742f67ec9fbe37f6c5cdfba4.jpg",
+        title: "GT 650 Custom",
+        description: "Royal Enfield Continental GT 650 Custom Edition",
+        price: "3,35,000",
+        button: "Buy Now"
+      },
+      {
+        img: "https://i.pinimg.com/originals/82/76/12/827612e7f11c9a338335b180bf7435b5.jpg",
+        title: "Yamaha Classic",
+        description: "BS6 Impact: 6 Yamaha Bikes Discontinued in India",
+        price: "2,20,000",
+        button: "Buy Now"
+      },
+      {
+        img: "https://i.pinimg.com/236x/dd/4d/6f/dd4d6f33cfbc4088ce03c0903d3c25a0.jpg",
+        title: "Royal Enfield Classic",
+        description: "Iconic Royal Enfield Classic 350 in Black",
+        price: "1,90,000",
+        button: "Buy Now"
+      },
+      {
+        img: "https://i.pinimg.com/236x/07/36/69/073669397df74777a686487935f3bba0.jpg",
+        title: "Continental GT 650",
+        description: "Royal Enfield Continental GT 650 - Cafe Racer",
+        price: "3,19,000",
+        button: "Buy Now"
+      },
+      {
+        img: "https://i.pinimg.com/736x/15/54/8c/15548c1b3687fc4c0bb9f55b4183a3bd.jpg",
+        title: "Vintage Bullet",
+        description: "Classic Royal Enfield Bullet Metal Plate Poster",
+        price: "1,50,000",
+        button: "Buy Now"
+      },
+      {
+        img: "https://i.pinimg.com/736x/51/c7/24/51c724b21596c024906a5eab396e7319.jpg",
+        title: "GT 650 Custom",
+        description: "Royal Enfield Continental GT 650 Custom Edition",
+        price: "3,35,000",
+        button: "Buy Now"
+      }
+    ];
+
+    cardDetails.forEach(card => {
+      const cardDiv = document.createElement("div");
+      cardDiv.classList.add("card");
+      cardDiv.innerHTML = `
+        <img src="${card.img}" alt="${card.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x169?text=Image+Not+Found';">
+        <div class="card-content">
+          <h2>${card.title}</h2>
+          <p>${card.description}</p>
+          <p class="price">Price: ₹${card.price}</p>
+          <button>${card.button}</button>
+        </div>
+      `;
+      container.appendChild(cardDiv);
+    });
+  </script>
+</body>
+</html>
