@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
 
+    <!-- Font Awesome CDN for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
-        * {
+         * {
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -91,96 +92,86 @@
         .forgot-password h4:hover {
             text-decoration: underline;
             cursor: pointer;
-        }
+        } 
     </style>
 </head>
 
 <body>
     <div class="login-container" id="main">
-
+        <!-- JS will inject content here -->
     </div>
 
     <script>
+        sidharth();
 
-        
-        let main = document.getElementById("main")
-        main.innerHTML = `
-         <h2>Login</h2>
+        let Username = "bhavik";
+        let Password = "bhavik@123";
 
-        <div class="input-group">
-            <i class="fas fa-user"></i>
-            <input type="text" id="userNAME" placeholder="Username">
-        </div>
+        function sidharth() {
+            let main = document.getElementById("main");
+            main.innerHTML = `
+                <h2>Login</h2>
 
-        <div class="input-group">
-            <i class="fas fa-lock"></i>
-            <input type="password" id="passWORD" placeholder="Password">
-        </div>
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="userNAME" placeholder="Username">
+                </div>
 
-        <div class="forgot-password" id="for" onclick="okk()">
-            <h4>Forgot Password?</h4>
-        </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="passWORD" placeholder="Password">
+                </div>
 
-        <input type="button" value="Sign In" onclick="ok()">
-        `
+                <div class="forgot-password" id="for" onclick="okk()">
+                    <h4>Forgot Password?</h4>
+                </div>
 
-        let Username = "bhavik"
-        let Password = "bhavik@123"
-
-        let user = document.getElementById("userNAME")
-        let pass = document.getElementById("passWORD")
-
-          
+                <input type="button" value="Sign In" onclick="ok()">
+            `;
+        }
 
         function ok() {
-            if (user.value == Username && pass.value == Password) {
-                alert("Sucessfull login !")
-            }
-            else {
-                alert("Invalide user & password")
+            let user = document.getElementById("userNAME");
+            let pass = document.getElementById("passWORD");
+
+            if (user.value === Username && pass.value === Password) {
+                alert("Successful login!");
+            } else {
+                alert("Invalid username or password.");
             }
         }
-
 
         function okk() {
+            let main = document.getElementById("main");
+            main.innerHTML = `
+                <h2>Forgot Password</h2>
 
-            let main = document.getElementById("main")
-            main.innerHTML =
-                `
-        <h2>Forgat Password</h2>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="bhavik" placeholder="New Password">
+                </div>
 
-         <div class="input-group">
-            <i class="fas fa-lock"></i>
-            <input type="password" id="bhavik" placeholder="New Password">
-        </div>
-        <div class="input-group">
-            <i class="fas fa-lock"></i>
-            <input type="password" id="sirvi" placeholder="Conform Password">
-        </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="sirvi" placeholder="Confirm Password">
+                </div>
 
-        <input type="button" value="Change Password" onclick="Chack()">
-        
-        `
+                <input type="button" value="Change Password" onclick="Chack()">
+            `;
         }
-
 
         function Chack() {
-            let newpassword = document.getElementById("bhavik")
-            let conformpassword = document.getElementById("sirvi")
+            let newpassword = document.getElementById("bhavik");
+            let conformpassword = document.getElementById("sirvi");
 
-
-            if (newpassword.value == conformpassword.value) {
-                Password = newpassword.value
-                alert("Sucessfully New Password !")
-
-                
-            }
-            else {
-                alert("not same password")
+            if (newpassword.value === conformpassword.value) {
+                Password = newpassword.value;
+                alert("Successfully changed password!");
+                sidharth();
+            } else {
+                alert("Passwords do not match.");
             }
         }
-
-
     </script>
 </body>
 
