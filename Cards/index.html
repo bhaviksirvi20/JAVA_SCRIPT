@@ -97,13 +97,14 @@
   </style>
 </head>
 <body>
-  <h1>🔥 Stylish Bike Collection 🔥</h1>
+ 
   <div class="container" id="container"></div>
 
   <script>
-    const container = document.getElementById("container");
-    const cardDetails = [
+    let container = document.getElementById("container");
+    let cardDetails = [
       {
+        id : 1,
         img: "https://i.pinimg.com/736x/a5/b9/6e/a5b96edd7d33f006007d53417899d170.jpg",
         title: "Yamaha Classic",
         description: "BS6 Impact: 6 Yamaha Bikes Discontinued in India",
@@ -111,6 +112,7 @@
         button: "Buy Now"
       },
       {
+        id : 2,
         img: "https://i.pinimg.com/736x/07/45/e3/0745e32144f00d467325c364dfa89c8b.jpg",
         title: "Royal Enfield Classic",
         description: "Iconic Royal Enfield Classic 350 in Black",
@@ -118,6 +120,7 @@
         button: "Buy Now"
       },
       {
+        id : 3,
         img: "https://i.pinimg.com/originals/dc/95/b2/dc95b22fd4ba68530a22f0891a7efcae.jpg",
         title: "Continental GT 650",
         description: "Royal Enfield Continental GT 650 - Cafe Racer",
@@ -125,6 +128,7 @@
         button: "Buy Now"
       },
       {
+        id : 4,
         img: "https://i.pinimg.com/originals/52/d9/d2/52d9d26c3e41e05344dcb6050fbf2e77.jpg",
         title: "Vintage Bullet",
         description: "Classic Royal Enfield Bullet Metal Plate Poster",
@@ -132,6 +136,7 @@
         button: "Buy Now"
       },
       {
+        id : 5,
         img: "https://i.pinimg.com/originals/ec/40/3d/ec403dd9742f67ec9fbe37f6c5cdfba4.jpg",
         title: "GT 650 Custom",
         description: "Royal Enfield Continental GT 650 Custom Edition",
@@ -139,6 +144,7 @@
         button: "Buy Now"
       },
       {
+        id : 6,
         img: "https://i.pinimg.com/originals/82/76/12/827612e7f11c9a338335b180bf7435b5.jpg",
         title: "Yamaha Classic",
         description: "BS6 Impact: 6 Yamaha Bikes Discontinued in India",
@@ -146,6 +152,7 @@
         button: "Buy Now"
       },
       {
+        id : 7,
         img: "https://i.pinimg.com/236x/dd/4d/6f/dd4d6f33cfbc4088ce03c0903d3c25a0.jpg",
         title: "Royal Enfield Classic",
         description: "Iconic Royal Enfield Classic 350 in Black",
@@ -153,6 +160,7 @@
         button: "Buy Now"
       },
       {
+        id : 8,
         img: "https://i.pinimg.com/236x/07/36/69/073669397df74777a686487935f3bba0.jpg",
         title: "Continental GT 650",
         description: "Royal Enfield Continental GT 650 - Cafe Racer",
@@ -160,6 +168,7 @@
         button: "Buy Now"
       },
       {
+        id : 9,
         img: "https://i.pinimg.com/736x/15/54/8c/15548c1b3687fc4c0bb9f55b4183a3bd.jpg",
         title: "Vintage Bullet",
         description: "Classic Royal Enfield Bullet Metal Plate Poster",
@@ -167,6 +176,7 @@
         button: "Buy Now"
       },
       {
+        id : 10,
         img: "https://i.pinimg.com/736x/51/c7/24/51c724b21596c024906a5eab396e7319.jpg",
         title: "GT 650 Custom",
         description: "Royal Enfield Continental GT 650 Custom Edition",
@@ -176,7 +186,7 @@
     ];
 
     cardDetails.forEach(card => {
-      const cardDiv = document.createElement("div");
+      let cardDiv = document.createElement("div");
       cardDiv.classList.add("card");
       cardDiv.innerHTML = `
         <img src="${card.img}" alt="${card.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x169?text=Image+Not+Found';">

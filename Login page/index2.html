@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .input-group {
+            position: relative;
+            margin: 15px 0;
+        }
+
+        .input-group i {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-container input[type="button"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container input[type="button"]:hover {
+            background-color: #357ab8;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .forgot-password h4 {
+            text-decoration: none;
+            color: #4a90e2;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .forgot-password h4:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container" id="main">
+
+    </div>
+
+    <script>
+
+        
+        let main = document.getElementById("main")
+        main.innerHTML = `
+         <h2>Login</h2>
+
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" id="userNAME" placeholder="Username">
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="passWORD" placeholder="Password">
+        </div>
+
+        <div class="forgot-password" id="for" onclick="okk()">
+            <h4>Forgot Password?</h4>
+        </div>
+
+        <input type="button" value="Sign In" onclick="ok()">
+        `
+
+        let Username = "bhavik"
+        let Password = "bhavik@123"
+
+        let user = document.getElementById("userNAME")
+        let pass = document.getElementById("passWORD")
+
+          
+
+        function ok() {
+            if (user.value == Username && pass.value == Password) {
+                alert("Sucessfull login !")
+            }
+            else {
+                alert("Invalide user & password")
+            }
+        }
+
+
+        function okk() {
+
+            let main = document.getElementById("main")
+            main.innerHTML =
+                `
+        <h2>Forgat Password</h2>
+
+         <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="bhavik" placeholder="New Password">
+        </div>
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="sirvi" placeholder="Conform Password">
+        </div>
+
+        <input type="button" value="Change Password" onclick="Chack()">
+        
+        `
+        }
+
+
+        function Chack() {
+            let newpassword = document.getElementById("bhavik")
+            let conformpassword = document.getElementById("sirvi")
+
+
+            if (newpassword.value == conformpassword.value) {
+                Password = newpassword.value
+                alert("Sucessfully New Password !")
+
+                
+            }
+            else {
+                alert("not same password")
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
