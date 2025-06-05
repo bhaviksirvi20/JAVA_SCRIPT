@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Static Calculator</title>
+  <link rel="stylesheet" href="style.css">
+ 
+</head>
+<body>
+  <div class="calculator" >
+    <div class="display" id="dis"></div>
+    <div class="displaya" id="disp"></div>
+    <div class="buttons">
+      <div class="btn" onclick="clearval()">C</div>
+      <div class="btn">±</div>
+      <div class="btn" onclick="displayval('%')">%</div>
+      <div class="btn operator" onclick="displayval('/')">÷</div>
+
+      <div class="btn" onclick="displayval('7')">7</div>
+      <div class="btn" onclick="displayval('8')">8</div>
+      <div class="btn" onclick="displayval('9')">9</div>
+      <div class="btn operator" onclick="displayval('*')">×</div>
+
+      <div class="btn" onclick="displayval('4')">4</div>
+      <div class="btn" onclick="displayval('5')">5</div>
+      <div class="btn" onclick="displayval('6')">6</div>
+      <div class="btn operator" onclick="displayval('-')">−</div>
+
+      <div class="btn" onclick="displayval('1')">1</div>
+      <div class="btn" onclick="displayval('2')">2</div>
+      <div class="btn" onclick="displayval('3')">3</div>
+      <div class="btn operator" onclick="displayval('+')">+</div>
+
+      <div class="btn zero" onclick="displayval('0')">0</div>
+      <div class="btn" onclick="displayval('.')">.</div>
+      <div class="btn equal" onclick="value('=')">=</div>
+    </div>
+  </div>
+  <script>
+    let dis = document.getElementById("dis");
+
+    function displayval(val){
+      document.getElementById("dis").innerHTML += val
+    }
+    function clearval(){
+      document.getElementById("dis").innerText = ""
+    }
+    function value(){
+      document.getElementById("disp").innerText = eval(document.getElementById("dis").innerText)
+    }
+  </script>
+</body>
+</html>

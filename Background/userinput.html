@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Changer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            border: 2px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 30px;
+            transition: background 0.5s ease;
+        }
+
+        button {
+            height: 50px;
+            width: 300px;
+            border: 2px solid white;
+            background: black;
+            color: white;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: white;
+            color: black;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+
+        button:active {
+            transform: scale(0.98);
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        input {
+            height: 50px;
+            width: 300px;
+            text-align: center;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="click" placeholder="Type: plane or gradient">
+    <button onclick="changeBackground()">Click me</button>
+
+    <script>
+        function getRandomColor() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        function changeBackground() {
+            const input = document.getElementById("click").value.trim().toLowerCase();
+
+            if (input === "plane") {
+                document.body.style.backgroundImage = "none"; // remove gradient
+                document.body.style.backgroundColor = getRandomColor();
+            } else if (input === "gradient") {
+                const angle = Math.floor(Math.random() * 360);
+                const color1 = getRandomColor();
+                const color2 = getRandomColor();
+                const color3 = getRandomColor();
+                document.body.style.backgroundImage = `linear-gradient(${angle}deg, ${color1}, ${color2}, ${color3})`;
+                document.body.style.backgroundColor = "transparent"; // just in case
+            } else {
+                alert("Please type 'plane' or 'gradient'");
+            }
+        }
+    </script>
+</body>
+
+</html>

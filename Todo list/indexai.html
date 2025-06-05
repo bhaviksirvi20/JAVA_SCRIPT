@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TODO LIST PROJECT</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      width: 100%;
+      height: 100vh;
+      background-image: url('https://images.pexels.com/photos/7718887/pexels-photo-7718887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .todo-container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .todo-container h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    #taskInput {
+      flex: 1;
+      padding: 10px 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    #taskInput:focus {
+      border-color: #6c63ff;
+      outline: none;
+    }
+
+    .input-group button {
+      padding: 10px 20px;
+      background-color: #6c63ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 1s;
+    }
+
+    .input-group button:hover {
+      background-color: #5548c8;
+    }
+
+    #taskList {
+      list-style: none;
+      margin-top: 10px;
+    }
+
+    #taskList li {
+      background: #f9f9f9;
+      padding: 12px 15px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      transition: 0.3s;
+    }
+
+    #taskList li:hover {
+      background: #f1f1f1;
+    }
+
+    #taskList li span,
+    #taskList li input[type="text"] {
+      flex-grow: 1;
+      color: #555;
+      font-size: 16px;
+      border: none;
+      background: none;
+    }
+
+    #taskList li input[type="text"] {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .actions button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    .actions .edit {
+      color: #4caf50;
+      border: 1px solid #4caf50;
+    }
+
+    .actions .edit:hover {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .actions .delete {
+      color: #f44336;
+      border: 1px solid #f44336;
+    }
+
+    .actions .delete:hover {
+      background-color: #f44336;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<div class="todo-container">
+  <h1>MY TODO LIST</h1>
+  <div class="input-group">
+    <input type="text" id="taskInput" placeholder="Add a new task..." />
+    <button onclick="addTask()">Add</button>
+  </div>
+  <ul id="taskList"></ul>
+</div>
+
+<script>
+function addTask() {
+  const taskInput = document.getElementById('taskInput');
+  const taskText = taskInput.value.trim();
+  if (taskText === "") {
+    alert("Please enter a task.");
+    return;
+  }
+
+  const taskList = document.getElementById('taskList');
+  
+  const li = document.createElement('li');
+  li.innerHTML = `
+    <span>${taskText}</span>
+    <div class="actions">
+      <button class="edit" onclick="editTask(this)">Edit</button>
+      <button class="delete" onclick="deleteTask(this)">Delete</button>
+    </div>
+  `;
+  
+  taskList.appendChild(li);
+  taskInput.value = "";
+}
+
+function deleteTask(button) {
+  const li = button.closest('li');
+  li.remove();
+}
+
+function editTask(button) {
+  const li = button.closest('li');
+  const span = li.querySelector('span');
+  const currentText = span.textContent;
+
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.value = currentText;
+
+  li.replaceChild(input, span);
+  input.focus();
+  input.setSelectionRange(input.value.length, input.value.length);
+
+  button.textContent = 'Save';
+
+  const saveFunction = function () {
+    const newText = input.value.trim();
+    if (newText === "") {
+      alert("Task cannot be empty.");
+      return;
+    }
+    const newSpan = document.createElement('span');
+    newSpan.textContent = newText;
+    li.replaceChild(newSpan, input);
+    button.textContent = 'Edit';
+    button.onclick = () => editTask(button);
+  };
+
+  button.onclick = saveFunction;
+
+  input.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+      saveFunction();
+    }
+  });
+}
+
+document.getElementById('taskInput').addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    addTask();
+  }
+});
+</script>
+</body>
+</html>

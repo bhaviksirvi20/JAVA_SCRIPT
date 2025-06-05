@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.odd & even</title>
+  </head>
+  <body>
+    <input type="text" id="val" />
+    <button onclick="push()">Click</button>
+    <h1 id="aa"></h1>
+
+    <script>
+      let aa = document.getElementById("aa");
+
+      function push() {
+        let val = document.getElementById("val").value;
+
+        if (val % 2 == 0) {
+          aa.innerText = `${val} : is Even `;
+        } else {
+          aa.innerText = `${val} : is odd `;
+        }
+
+        let deleta = document.getElementById("val");
+        deleta.value = ``;
+      }
+    </script>
+  </body>
+</html>

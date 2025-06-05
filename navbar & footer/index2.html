@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document 2</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <div id="main">
+    
+  </div>
+  <div id="header">
+    
+    <h1>Header</h1>
+    
+  </div>
+
+  <div id="footer">
+   
+  </div>
+
+  <script type="module">
+    import nav from './assets/navbar.js'
+    import footer from './assets/footer.js'
+    document.getElementById("main").appendChild(nav())
+    document.getElementById("footer").appendChild(footer())
+  </script>
+</body>
+</html>

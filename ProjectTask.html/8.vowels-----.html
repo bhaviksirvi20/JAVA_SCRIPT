@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vowel Checker</title>
+</head>
+
+<body>
+    <form action="">
+        <input type="text" id="vowel" placeholder="Enter Text">
+        <button id="push">Click</button>
+    </form>
+
+    <h1 id="aval"></h1>
+
+    <script>
+        let aval = document.getElementById("aval");
+        let push = document.getElementById("push");
+
+        push.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            let vowel = document.getElementById("vowel").value;
+            aval.innerText = `String: ${vowel}`;
+
+            let vowels = ['a', 'e', 'i', 'o', 'u']
+
+            let print = ""
+
+            for (let i = 0; i < vowel.lenght; i++){
+                
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: aqua;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: end;
+            padding-bottom: 50px;
+        }
+
+        button {
+            height: 50px;
+            width: 300px;
+            border: 2px solid white;
+            background-color: black;
+            color: white;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: white;
+            color: black;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        button:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body id="color">
+    <button onclick="Click()">Click</button>
+
+    <script>
+        let color = document.getElementById("color");
+
+        function Click() {
+            let a = Math.floor(Math.random() * 256);
+            let b = Math.floor(Math.random() * 256);
+            let c = Math.floor(Math.random() * 256);
+
+            color.style.backgroundColor = `rgb(${a},${b},${c})`;
+        }
+    </script>
+</body>
+
+</html>

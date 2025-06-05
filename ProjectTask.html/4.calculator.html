@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 350px;
+            border: 2px solid;
+            width: 100%;
+            text-align: center;
+        }
+
+        .calculator h1 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .calculator input[type="tel"],
+        .calculator input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .calculator button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+
+        .calculator button:hover {
+            background-color: #0056b3;
+        }
+
+        .operation-list {
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .operation-list h1 {
+            font-size: 16px;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        #ans {
+            margin-top: 20px;
+            font-size: 22px;
+            color: #222;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+        <input type="tel" id="a" placeholder="Enter the first value">
+        <input type="tel" id="b" placeholder="Enter the second value">
+
+        <div class="operation-list">
+            <h1>1. Addition</h1>
+            <h1>2. Subtraction</h1>
+            <h1>3. Multiplication</h1>
+            <h1>4. Division</h1>
+        </div>
+
+        <input type="text" id="user" placeholder="Enter your choice (1-4)">
+        <button onclick="calculator()">Calculate</button>
+
+        <div id="ans"></div>
+    </div>
+
+    <script>
+        function calculator() {
+            let a = parseFloat(document.getElementById("a").value);
+            let b = parseFloat(document.getElementById("b").value);
+            let user = parseInt(document.getElementById("user").value);
+            let ans = document.getElementById("ans");
+
+            if (isNaN(a) || isNaN(b) || isNaN(user)) {
+                ans.innerText = "Please enter valid numbers.";
+                return;
+            }
+
+            switch (user) {
+                case 1:
+                    ans.innerText = `Answer is: ${a + b}`;
+                    break;
+                case 2:
+                    ans.innerText = `Answer is: ${a - b}`;
+                    break;
+                case 3:
+                    ans.innerText = `Answer is: ${a * b}`;
+                    break;
+                case 4:
+                    if (b !== 0) {
+                        ans.innerText = `Answer is: ${a / b}`;
+                    } else {
+                        ans.innerText = `Cannot divide by zero.`;
+                    }
+                    break;
+                default:
+                    ans.innerText = `Invalid choice. Please enter 1-4.`;
+                    break;
+            }
+        }
+    </script>
+</body>
+
+</html>
