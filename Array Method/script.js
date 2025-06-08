@@ -2,7 +2,7 @@ console.log("----------------------------------");
 console.log("array : [10, 20, 30, 40, 50]");
 console.log("----------------------------------");
 
-let arr = [10, 20, 30, 40, 50]
+let arr = [10, 20, 30, 40, 1]
 
 // 1. map()
 let arr1 = arr.map((e) => e * e);
@@ -46,9 +46,9 @@ console.log("----------------------------------");
 
 // 7. every()
 let arr7 = arr.every(e => e > 5)
-let arr77 = arr.every(e => e < 6)
+// let arr77 = arr.every(e => e <= 50)
 console.log("7.every e > 5 : " , arr7);
-console.log("7.every e < 6 : " , arr77);
+// console.log("7.every e > 60 : " , arr77);
 console.log("----------------------------------");
 
 

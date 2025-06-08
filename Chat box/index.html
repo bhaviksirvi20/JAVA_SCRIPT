@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instagram Chat UI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Left Phone -->
+    <div class="phone left-user">
+      <div class="status-bar">
+        <div>9:41</div>
+        <div>📶 📡 🔋</div>
+      </div>
+      <div class="top-bar">
+        <div>←</div>
+        <div class="avatar"></div>
+        <div>Google Ai</div>
+        <div class="spacer"></div>
+        <div class="dots">⋮</div>
+      </div>
+      <div class="messages" id="resiveM">
+
+      </div>
+      <div class="input-area">
+        <input type="text" id="input2" placeholder="Type a message..." />
+        <button onclick="replayMessage()"> Send &nbsp;<i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+
+    <!-- Right Phone -->
+    <div class="phone right-user">
+      <div class="status-bar">
+        <div>9:41</div>
+        <div>📶 📡 🔋</div>
+      </div>
+      <div class="top-bar">
+        <div>←</div>
+        <div class="avatar2"></div>
+        <div>Bhavik</div>
+        <div class="spacer"></div>
+        <div class="dots">⋮</div>
+      </div>
+      <div class="messages" id="sendM">
+
+      </div>
+      <div class="input-area">
+        <input type="text" id="input" placeholder="Type a message..." />
+        <button onclick="sendMessage()"> Send &nbsp;<i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="./script.js"></script>
+  <!-- <script src="./revision.js"></script> -->
+</body>
+
+</html>

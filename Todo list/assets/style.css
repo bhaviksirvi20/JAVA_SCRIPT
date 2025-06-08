@@ -1,0 +1,205 @@
+/* Root Variables */
+:root {
+  --bg-color: #0d0d0d;
+  --container-bg: #1a1a1a;
+  --text-color: #ffffff;
+  --input-bg: #262626;
+  --list-bg: #262626;
+  --edit-color: #03dac6;
+  --delete-color: #ff4d4d;
+  --box-shadow: rgba(0, 255, 255, 0.1);
+}
+
+.light {
+  --bg-color: #f1f1f1;
+  --container-bg: #ffffff;
+  --text-color: #000000;
+  --input-bg: #e0e0e0;
+  --list-bg: #f8f8f8;
+  --edit-color: #00796b;
+  --delete-color: #c62828;
+  --box-shadow: rgba(0, 0, 0, 0.05);
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Container */
+.todo-container {
+  background-color: var(--container-bg);
+  color: var(--text-color);
+  padding: 40px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 0 20px var(--box-shadow);
+  border: 1px solid #333;
+  transition: all 0.3s ease;
+}
+
+/* Header */
+.todo-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+/* ⬇⬇ Mode Toggle Styles Start ⬇⬇ */
+.mode-toggle {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+#mode-btn {
+  background: transparent;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+#mode-btn:hover {
+  background: var(--text-color);
+  color: var(--bg-color);
+}
+/* ⬆⬆ Mode Toggle Styles End ⬆⬆ */
+
+/* Input Section */
+.input-section {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.input-section input {
+  flex: 1;
+  height: 50px;
+  padding: 0 15px;
+  font-size: 16px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  transition: border 0.3s;
+}
+
+.input-section input:focus {
+  outline: none;
+  border-color: var(--edit-color);
+}
+
+.input-section button {
+  background: var(--edit-color);
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.input-section button:hover {
+  background: #00bfa5;
+}
+
+/* Task List */
+ul.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+ul.todo-list li {
+  background-color: var(--list-bg);
+  padding: 15px 20px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.03);
+}
+
+/* Fix hover color based on mode */
+body.light ul.todo-list li:hover {
+  background-color: #e0e0e0;
+}
+body:not(.light) ul.todo-list li:hover {
+  background-color: #2e2e2e;
+}
+
+ul.todo-list li span {
+  flex: 1;
+  color: var(--text-color);
+  font-size: 16px;
+  word-break: break-word;
+}
+
+/* Action Buttons */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.actions .edit,
+.actions .delete {
+  padding: 6px 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.actions .edit {
+  border-color: var(--edit-color);
+  color: var(--edit-color);
+}
+
+.actions .edit:hover {
+  background: var(--edit-color);
+  color: #000;
+}
+
+.actions .delete {
+  border-color: var(--delete-color);
+  color: var(--delete-color);
+}
+
+.actions .delete:hover {
+  background: var(--delete-color);
+  color: #fff;
+}
+
+/* Input during edit mode */
+li input.input {
+  flex: 1;
+  height: 40px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--input-bg);
+  border: 1px solid #444;
+  color: var(--text-color);
+  font-size: 16px;
+}
