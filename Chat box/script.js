@@ -22,9 +22,6 @@ function sendMessage() {
     else {
         alert("Ples Enter Message...")
     }
-
-
-
     // 👇 Auto scroll to bottom
     sendM.scrollTop = sendM.scrollHeight;
     resiveM.scrollTop = resiveM.scrollHeight;

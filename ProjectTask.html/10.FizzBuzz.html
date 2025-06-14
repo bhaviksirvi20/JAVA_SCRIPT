@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10. FizzBuzz</title>
+</head>
+<body>
+    <h1 id="aval"></h1>
+    <input type="number" id="inputUser" placeholder="Enter Value..">
+    <button onclick="fizzbuzz()">Click</button>
+
+    <script>
+        let aval = document.getElementById("aval")
+        
+        for (let i = 1; i <= 50; i++) {
+          aval.innerText += ` ${i}`
+            
+        }
+        function fizzbuzz(){
+            let inputUser = document.getElementById("inputUser").value 
+
+            if (inputUser % 3 == 0 && inputUser % 5 == 0) {
+                aval.innerText = ` ${inputUser} = FizzBuzz`
+            }
+            else if (inputUser % 3 == 0){
+                aval.innerText = ` ${inputUser} = Fizz`
+            }
+            else if (inputUser % 5 == 0){
+                aval.innerText = ` ${inputUser} = Buzz`
+            }
+            else{
+                aval.innerText = inputUser
+            }
+        }
+    </script>
+</body>
+</html>

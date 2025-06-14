@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7. arr[sum]</title>
+</head>
+
+<body>
+    <input type="text" id="user" placeholder="enter value...">
+    <button onclick="press()">Click</button>
+    <div id="inputs"></div>
+    <button onclick="ans()">Answer</button>
+    <h1 id="aval"></h1>
+
+    <script>
+        function press(){
+
+            let user = +document.getElementById("user").value 
+            console.log(user);
+            let inputs = document.getElementById("inputs")
+            
+            for (let i = 0; i < user; i++) {
+                
+                let input = document.createElement("input")
+                inputs.appendChild(input)
+                input.type = "number"
+                
+            }
+            let userr = document.getElementById("user")
+            userr.value = "" 
+        }
+        function ans(){
+            let aval = document.getElementById("aval")
+            let inputs = document.querySelectorAll("#inputs input")
+            let sum = 0 
+
+            for (let j = 0; j < inputs.length; j++) 
+            {
+                sum += Number(inputs[j].value)                
+            }
+            aval.innerText = `Answer : ${sum}`
+            console.log(sum);
+            
+        }
+        
+    </script>
+</body>
+
+</html>

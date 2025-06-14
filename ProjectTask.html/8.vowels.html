@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vowel Checker</title>
+</head>
+
+<body>
+
+    <input type="text" id="vowel" placeholder="Enter Text">
+    <button onclick="push()">Click</button>
+    <h1 id="aval"></h1>
+
+    <script>
+        function push() {
+            let vowel = document.getElementById("vowel").value;
+            let aval = document.getElementById("aval");
+            let count = 0
+            let str
+
+            for (let i = 0; i < vowel.length; i++) {
+
+                str = vowel[i]
+                if (str == 'a' || str == 'e' || str == 'i' || str == 'o' || str == 'u') {
+                    count++
+                }
+            }
+            aval.innerText = `This is vowal : ${count} `
+            console.log(count);
+
+
+            let vowell = document.getElementById("vowel")
+            vowell.value = ""
+        }
+    </script>
+</body>
+
+</html>

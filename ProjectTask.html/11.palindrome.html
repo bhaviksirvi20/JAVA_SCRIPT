@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11. Palindrome</title>
+</head>
+
+<body>
+    <input type="text" id="inputUser" placeholder="Enter Value..">
+    <button onclick="palindrome()">Click</button>
+    <h1 id="aval"></h1>
+
+    <script>
+
+        function palindrome() {
+            let inputUser = document.getElementById("inputUser").value
+            let aval = document.getElementById("aval")
+            let print = ""
+            for (let i = inputUser.length - 1; i >= 0; i--) {
+                print += inputUser[i]
+            }
+            if (inputUser == print) {
+                aval.innerText = `${inputUser} = true`
+            }
+            else {
+                aval.innerText = `${inputUser} = false`
+            }
+        }
+    </script>
+</body>
+
+</html>

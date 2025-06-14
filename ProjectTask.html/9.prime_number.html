@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prime Number</title>
+</head>
+
+<body>
+    <input type="text" id="user" placeholder="Enter The Value...">
+    <button onclick="press()">Click</button>
+    <h1 id="aval"></h1>
+
+    <script>
+        function press() {
+
+            let input = +document.getElementById("user").value
+
+            let count = 0
+            for (let i = 1; i <= input; i++) {
+                if (input % i == 0) {
+                    count++
+                }
+            }
+            if (count == 2) {
+                aval.innerText = `${input} is prime number...`
+            }
+            else {
+
+                aval.innerText = `${input} is not prime number...`
+            }
+        }
+    </script>
+</body>
+
+</html>

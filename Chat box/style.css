@@ -2,7 +2,7 @@ body{
  background-position: center;
    background-repeat: no-repeat;
    background-size: cover;
-   background-image: url("https://www.pixground.com/wp-content/uploads/2024/06/Windows-11-Copilot-4K-Wallpaper.jpg");
+   /* background-image: url("https://www.pixground.com/wp-content/uploads/2024/06/Windows-11-Copilot-4K-Wallpaper.jpg"); */
   
 }
 html {
@@ -110,9 +110,9 @@ html {
 
  .messages {
    flex: 1;
-   
    padding: 12px 15px;
-   overflow-y: hidden;
+   scrollbar-width: 0px;
+   overflow-y: auto;
    display: flex;
    flex-direction: column;
    gap: 10px;
@@ -122,7 +122,9 @@ html {
    background-repeat: no-repeat;
    background-image: url("https://i.pinimg.com/474x/02/1b/e9/021be96a7993d8da5e76ed27eaa4f626.jpg");
  }
-
+.messages::-webkit-scrollbar{
+  width: 0;
+}
  .message {
    max-width: 70%;
    padding: 10px 15px;
