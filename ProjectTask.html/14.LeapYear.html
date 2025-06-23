@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14.LeapYear</title>
+</head>
+
+<body>
+    <input type="number" id="val" placeholder="Enter The Value..." />
+    <button onclick="push()">Click</button>
+    <h1 id="aval"></h1>
+
+    <script>
+
+        function push() {
+            let val = document.getElementById("val").value
+            
+            let aval = document.getElementById("aval")
+            aval.innerText = `${val}`
+
+            if(val % 4 == 0){
+                aval.innerText = `${val} is Leap Year...`
+            }
+            else{
+                aval.innerText = `${val} is Not a Leap Year...`
+
+            }
+
+            let vale = document.getElementById("val")
+            vale.value = ""
+       
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12. Duplicate Array</title>
+</head>
+
+<body>
+    <input type="text" id="user" placeholder="enter value...">
+    <button onclick="press()">Click</button>
+    <div id="inputs"></div>
+    <button onclick="ans()">Answer</button>
+    <h1 id="aval"></h1>
+
+    <script>
+        function press(){
+
+            let user = +document.getElementById("user").value 
+            console.log(user);
+            let inputs = document.getElementById("inputs")
+            
+            for (let i = 0; i < user; i++) {
+                
+                let input = document.createElement("input")
+                inputs.appendChild(input)
+                input.type = "number"
+                
+            }
+            let userr = document.getElementById("user")
+            userr.value = "" 
+        }
+        function ans(){
+          
+        }
+        
+    </script>
+</body>
+
+</html>

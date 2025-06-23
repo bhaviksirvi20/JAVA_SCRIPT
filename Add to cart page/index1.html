@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Theme E-Commerce</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --secondary: #4cc9f0;
+      --accent: #f72585;
+      --light: #e2e2e2;
+      --dark: #16213e;
+      --darker: #0f0f1a;
+      --success: #4ade80;
+      --text: #f8f8f8;
+      --text-light: #b8b8b8;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--darker);
+    }
+    
+    header {
+      background-color: var(--primary);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      color: var(--light);
+    }
+    
+    .logo i {
+      color: var(--accent);
+      margin-right: 10px;
+    }
+    
+    .nav-container {
+      display: flex;
+      align-items: center;
+    }
+    
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--light);
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 101;
+    }
+    
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    
+    nav a {
+      color: var(--light);
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+    
+    nav a:hover {
+      color: var(--accent);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent);
+      transition: width 0.3s;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    .cart-icon {
+      position: relative;
+      font-size: 1.3rem;
+      cursor: pointer;
+      margin-left: 25px;
+    }
+    
+    .cart-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background-color: var(--accent);
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: bold;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    
+    .page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--light);
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .page-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: var(--accent);
+    }
+    
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .product {
+      background: var(--primary);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .product:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+    
+    .product-image {
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+    
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    
+    .product:hover .product-image img {
+      transform: scale(1.1);
+    }
+    
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: var(--accent);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      z-index: 2;
+    }
+    
+    .product-info {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .product-category {
+      color: var(--secondary);
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .product-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: var(--light);
+      line-height: 1.4;
+    }
+    
+    .product-price {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .current-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    
+    .original-price {
+      font-size: 1rem;
+      text-decoration: line-through;
+      color: var(--text-light);
+      margin-left: 10px;
+    }
+    
+    .product-rating {
+      color: #f39c12;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+      font-size: 0.9rem;
+    }
+    
+    .btn-primary {
+      background-color: var(--accent);
+      color: white;
+      width: 100%;
+    }
+    
+    .btn-primary:hover {
+      background-color: #d3166b;
+      transform: translateY(-2px);
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--secondary);
+      color: var(--secondary);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--secondary);
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+    
+    .product-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+    
+    .product-actions .btn {
+      flex: 1;
+    }
+    
+    .sale-banner {
+      background: linear-gradient(90deg, var(--accent), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      box-shadow: 0 4px 15px rgba(247, 37, 133, 0.3);
+    }
+    
+    footer {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 3rem 2rem;
+      margin-top: 3rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: left;
+    }
+    
+    .footer-column h3 {
+      color: var(--light);
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: var(--accent);
+    }
+    
+    .footer-column ul {
+      list-style: none;
+    }
+    
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-column ul li a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-column ul li a:hover {
+      color: var(--accent);
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 1rem;
+    }
+    
+    .social-icons a {
+      color: var(--light);
+      font-size: 1.2rem;
+      transition: color 0.3s, transform 0.3s;
+    }
+    
+    .social-icons a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 992px) {
+      .nav-toggle {
+        display: block;
+      }
+      
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background-color: var(--primary);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 6rem 2rem 2rem;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+        transition: right 0.3s;
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      nav a {
+        margin: 15px 0;
+        font-size: 1.1rem;
+        margin-left: 0;
+      }
+      
+      .cart-icon {
+        margin: 15px 0 0 0;
+      }
+      
+      .products {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+    
+    @media (max-width: 576px) {
+      header {
+        padding: 1rem;
+      }
+      
+      .products {
+        grid-template-columns: 1fr;
+      }
+      
+      .product-image {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <i class="fas fa-moon"></i>
+    DarkShop
+  </div>
+  
+  <div class="nav-container">
+    <button class="nav-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <nav id="main-nav">
+      <a href="#">Home</a>
+      <a href="#">Shop</a>
+      <a href="#">Categories</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <div class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cardC">0</span>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="sale-banner">
+  🚀 Flash Sale - Limited Time Offers! Shop Now 🚀
+</div>
+
+<div class="container">
+  <h1 class="page-title">Featured Products</h1>
+  
+  <div class="products" id="product-section">
+    
+    <!-- Smart Watches -->
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Apple Watch Series 8">
+        <span class="product-badge">Sale</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Smart Watches</div>
+        <h3 class="product-title">Apple Watch Series 8 (GPS, 45mm)</h3>
+        <div class="product-price">
+          <span class="current-price">$399.99</span>
+          <span class="original-price">$429.99</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+          (142)
+        </div>
+        <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+      </div>
+    </div>
+    
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Samsung Galaxy Watch 5">
+        <span class="product-badge">New</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Smart Watches</div>
+        <h3 class="product-title">Samsung Galaxy Watch 5 (44mm)</h3>
+        <div class="product-price">
+          <span class="current-price">$279.99</span>
+          <span class="original-price">$299.99</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          (87)
+        </div>
+        <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Headphones -->
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sony WH-1000XM5">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Headphones</div>
+        <h3 class="product-title">Sony WH-1000XM5 Wireless</h3>
+        <div class="product-price">
+          <span class="current-price">$349.99</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          (256)
+        </div>
+        <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+      </div>
+    </div>
+    
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Bose QuietComfort 45">
+        <span class="product-badge">Bestseller</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Headphones</div>
+        <h3 class="product-title">Bose QuietComfort 45</h3>
+        <div class="product-price">
+          <span class="current-price">$329.00</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+          (189)
+        </div>
+        <div class="product-actions">
+          <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+          <button class="btn btn-outline">Wishlist</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Smartphones -->
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="iPhone 14 Pro">
+        <span class="product-badge">New</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Smartphones</div>
+        <h3 class="product-title">iPhone 14 Pro (128GB)</h3>
+        <div class="product-price">
+          <span class="current-price">$999.00</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+          (421)
+        </div>
+        <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+      </div>
+    </div>
+    
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1664478546384-d57ffe74a78c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Samsung Galaxy S23">
+        <span class="product-badge">-15%</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Smartphones</div>
+        <h3 class="product-title">Samsung Galaxy S23 (256GB)</h3>
+        <div class="product-price">
+          <span class="current-price">$849.99</span>
+          <span class="original-price">$999.99</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          (156)
+        </div>
+        <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Laptops -->
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="MacBook Pro 14">
+        <span class="product-badge">Bestseller</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Laptops</div>
+        <h3 class="product-title">MacBook Pro 14" (M2 Pro, 16GB)</h3>
+        <div class="product-price">
+          <span class="current-price">$1,999.00</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+          (324)
+        </div>
+        <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+      </div>
+    </div>
+    
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Dell XPS 15">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Laptops</div>
+        <h3 class="product-title">Dell XPS 15 (2023, i7, 16GB)</h3>
+        <div class="product-price">
+          <span class="current-price">$1,599.99</span>
+          <span class="original-price">$1,799.99</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          (92)
+        </div>
+        <div class="product-actions">
+          <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+          <button class="btn btn-outline">Wishlist</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Cameras -->
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sony A7 IV">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Cameras</div>
+        <h3 class="product-title">Sony A7 IV Mirrorless Camera</h3>
+        <div class="product-price">
+          <span class="current-price">$2,499.99</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+          (112)
+        </div>
+        <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+      </div>
+    </div>
+    
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Canon EOS R6">
+        <span class="product-badge">New</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Cameras</div>
+        <h3 class="product-title">Canon EOS R6 Mark II</h3>
+        <div class="product-price">
+          <span class="current-price">$2,499.00</span>
+          <span class="original-price">$2,799.00</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          (215)
+        </div>
+        <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Gaming -->
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="PlayStation 5">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Gaming</div>
+        <h3 class="product-title">Sony PlayStation 5 Console</h3>
+        <div class="product-price">
+          <span class="current-price">$499.99</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+          (634)
+        </div>
+        <div class="product-actions">
+          <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+          <button class="btn btn-outline">Wishlist</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Xbox Series X">
+        <span class="product-badge">Sale</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Gaming</div>
+        <h3 class="product-title">Xbox Series X Console</h3>
+        <div class="product-price">
+          <span class="current-price">$449.99</span>
+          <span class="original-price">$499.99</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          (512)
+        </div>
+        <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Accessories -->
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Ray-Ban Aviator">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Accessories</div>
+        <h3 class="product-title">Ray-Ban Aviator Sunglasses</h3>
+        <div class="product-price">
+          <span class="current-price">$153.00</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+          (87)
+        </div>
+        <div class="product-actions">
+          <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+          <button class="btn btn-outline">Wishlist</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Travel Backpack">
+        <span class="product-badge">-25%</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Accessories</div>
+        <h3 class="product-title">Premium Travel Backpack (40L)</h3>
+        <div class="product-price">
+          <span class="current-price">$89.99</span>
+          <span class="original-price">$119.99</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          (78)
+        </div>
+        <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Footwear -->
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Nike Air Max">
+        <span class="product-badge">-30%</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Footwear</div>
+        <h3 class="product-title">Nike Air Max 270 Running Shoes</h3>
+        <div class="product-price">
+          <span class="current-price">$129.99</span>
+          <span class="original-price">$185.99</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+          (198)
+        </div>
+        <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+      </div>
+    </div>
+    
+    <div class="product">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Adidas Ultraboost">
+      </div>
+      <div class="product-info">
+        <div class="product-category">Footwear</div>
+        <h3 class="product-title">Adidas Ultraboost 22 Running Shoes</h3>
+        <div class="product-price">
+          <span class="current-price">$179.99</span>
+        </div>
+        <div class="product-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          (134)
+        </div>
+        <div class="product-actions">
+          <button class="btn btn-primary" onclick="add()">Add to Cart</button>
+          <button class="btn btn-outline">Wishlist</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<script src="./script.js"></script>
+<footer>
+  <div class="footer-content">
+    <div class="footer-column">
+      <h3>Shop</h3>
+      <ul>
+        <li><a href="#">All Products</a></li>
+        <li><a href="#">Featured</a></li>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Sale Items</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Customer Service</h3>
+      <ul>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns & Exchanges</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-column">
+      <h3>About</h3>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Connect</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+      <p style="margin-top: 20px; color: var(--text-light);">
+        Subscribe to our newsletter for exclusive offers
+      </p>
+    </div>
+  </div>
+  
+  <div class="copyright">
+    &copy; 2023 DarkShop. All rights reserved.
+  </div>
+</footer>
+
+<!-- <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('nav');
+    
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+    
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+      });
+    });
+  });
+</script> -->
+
+</body>
+</html>
