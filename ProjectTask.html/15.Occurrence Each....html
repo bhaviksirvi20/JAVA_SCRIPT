@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15. Occurrence </title>
+</head>
+<body>
+    <input type="text" id="inputs" placeholder="Enter Value....">
+    <button onclick="push()">Click</button>
+    
+    <h1 id="aval"></h1>
+    <h1 id="bval"></h1>
+
+    <script>
+        function push(){
+            let inputs = document.getElementById("inputs").value
+            let inputs1 = document.getElementById("inputs").value = ""
+            let aval = document.getElementById("aval")
+            let bval = document.getElementById("bval")
+
+            bval.innerText = `${inputs}`
+
+            let count = 0
+            count = inputs.length
+            aval.innerText = `String Length is : ${count}`
+        }
+    </script>
+</body>
+</html>
