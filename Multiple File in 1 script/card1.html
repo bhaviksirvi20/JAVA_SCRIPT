@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="aval"></h1>
+    <h1 id="aval"></h1>
+    <h1 id="aval"></h1>
+    <script>
+        let h1 = document.querySelectorAll("#aval")
+        let bhavik1 = localStorage.getItem("name1")
+        let bhavik2 = localStorage.getItem("name2")
+        let bhavik3 = localStorage.getItem("name3")
+
+        let bhavik = [bhavik1,bhavik2,bhavik3]
+        h1.forEach((e,i)=>{
+            e.innerText = bhavik[i]
+        })
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping Cart - DarkShop</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="main-styles.css" />
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <i class="fas fa-moon"></i>
+      DarkShop
+    </div>
+
+    <div class="nav-container">
+      <label for="nav-toggle" class="nav-toggle-label">
+        <i class="fas fa-bars"></i>
+      </label>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="#" class="nav-link">Shop</a>
+        <a href="#" class="nav-link">Categories</a>
+        <a href="#" class="nav-link">About</a>
+        <a href="#" class="nav-link">Contact</a>
+        <a href="cart.html" class="cart-link">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="count">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="container">
+      <nav class="breadcrumb-nav">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <span class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></span>
+        <span class="breadcrumb-current">Shopping Cart</span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="cart-page">
+      <!-- Cart Header -->
+      <div class="cart-header">
+        <h1 class="cart-title">
+          <i class="fas fa-shopping-cart"></i>
+          Your Shopping Cart
+        </h1>
+        <div class="cart-summary-badge" id="count">0 Items</div>
+      </div>
+
+      <!-- Cart Content -->
+      <div class="cart-main-content">
+        <!-- Cart Items Section -->
+        <div class="cart-items-section">
+          <!-- Cart Items Header -->
+          <div class="cart-items-header">
+            <div class="select-all-container">
+              <input type="checkbox" id="selectAll" onclick="selectcheck()" class="custom-checkbox" />
+              <label for="select-all">Select All</label>
+            </div>
+            <div class="cart-actions-header">
+              <button class="btn-link" onclick="removeAll()">
+                <i class="fas fa-trash"></i> Remove Selected
+              </button>
+            </div>
+          </div>
+
+          <!-- Cart Items List -->
+          <div class="container" id="containeritem">
+
+          </div>
+        </div>
+
+        <!-- Cart Sidebar -->
+        <div class="cart-sidebar">
+          <!-- Order Summary -->
+          <div class="order-summary">
+            <h3>Order Summary</h3>
+
+            <div class="summary-row">
+              <span>Subtotal (3 items)</span>
+              <span id="total"></span>
+            </div>
+
+            <div class="summary-row">
+              <span>Shipping</span>
+              <span class="free-shipping">Free</span>
+            </div>
+
+            <div class="summary-row">
+              <span>Tax</span>
+              <span>$70.40</span>
+            </div>
+
+            <hr class="summary-divider" />
+
+            <div class="summary-row total-row">
+              <span>Total</span>
+              <span>$950.37</span>
+            </div>
+
+            <!-- Promo Code -->
+            <div class="promo-code-section">
+              <details class="promo-details">
+                <summary class="promo-summary">
+                  <i class="fas fa-tag"></i>
+                  Have a promo code?
+                </summary>
+                <div class="promo-input-group">
+                  <input type="text" placeholder="Enter promo code" class="promo-input" />
+                  <button class="btn btn-outline">Apply</button>
+                </div>
+              </details>
+            </div>
+
+            <!-- Checkout Button -->
+            <button class="btn btn-primary checkout-btn">
+              <i class="fas fa-lock"></i>
+              Proceed to Checkout
+            </button>
+
+            <!-- Security Badge -->
+            <div class="security-badge">
+              <i class="fas fa-shield-alt"></i>
+              <span>Secure Checkout</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="#">All Products</a></li>
+          <li><a href="#">Featured</a></li>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Sale Items</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Customer Service</h3>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">Returns & Exchanges</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>About</h3>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Connect</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+        <p>Subscribe to our newsletter for exclusive offers</p>
+      </div>
+    </div>
+
+    <div class="copyright">&copy; 2024 DarkShop. All rights reserved.</div>
+  </footer>
+
+  <script>
+    function selectcheck() {
+      let masterCheckbox = document.getElementById("selectAll");
+      let checkboxes = document.querySelectorAll(".items-checkbox");
+
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = masterCheckbox.checked;
+      }
+    }
+    function removeAll() {
+      let checkboxes = document.querySelectorAll(".items-checkbox");
+
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          let card = checkboxes[i].closest(".cart-items-list");
+          if (card) {
+            card.remove();
+          }
+        }
+      }
+    }
+
+    let data = JSON.parse(localStorage.getItem("bhavik"));
+    localStorage.getItem("bhavik1");
+    let container1 = document.getElementById("containeritem");
+    if (count && data.length > 0) {
+      data.forEach((e) => {
+        container1.innerHTML += `
+          <div class="cart-items-list" id="card" style="background-color: black">
+            <input type="checkbox" id="item" class="items-checkbox" />
+            <div class="item-image">
+              <img src="${e.image}" alt="Apple Watch Series 8" />
+              </div>
+              <div class="item-details">
+                <h3 class="item-name">${e.title}</h3>
+                <div class="item-category">${e.category}</div>
+                <div class="item-stock">✓ In Stock</div>
+                <div class="item-price">
+                  $ ${e.currentPrice}
+                  <span class="item-original-price">$ 2500</span>
+                  </div>
+                  </div>
+                  <div class="quantity-controls">
+                    <button onclick="minus()" class="quantity-btn minus">
+                      <i class="fas fa-minus"></i>
+                      </button>
+                      <span  id="addval" class="quantity-display">1</span>
+                      <button onclick="plus()" class="quantity-btn plus">
+                        <i class="fas fa-plus"></i>
+                        </button>
+                        </div>
+                        <div class="item-actions">
+                          <button class="remove-btn" title="Remove item">
+                            <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="save-later-btn">Save for Later</button>
+                            </div>
+                            </div>
+                            `;
+        localStorage.removeItem("bhavik");
+
+
+      });
+
+
+      let add = 1
+      function plus() {
+        if (add > 0) {
+          add++
+          let addval = document.getElementById("addval")
+          addval.innerText = `${add}`
+        }
+      }
+      function minus() {
+        if (add > 1) {
+          add--
+          let addval = document.getElementById("addval")
+          addval.innerText = `${add}`
+        }
+      }
+      } else {
+        alert("your card is empty");
+      }
+
+
+
+    let total = document.getElementById("total")
+    total.innerText = `$${e.currentPrice}`
+  </script>
+</body>
+
+</html>

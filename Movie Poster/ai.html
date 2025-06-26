@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Search</title>
+</head>
+<body>
+
+  <input type="text" id="input" placeholder="Enter movie name...">
+  <button onclick="pressbtn()">Search</button>
+
+  <script>
+    function pressbtn() {
+      let query = document.getElementById("input").value;
+
+      fetch(`http://www.omdbapi.com/?s=${query}&apikey=2f3df54`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.Search) {
+            data.Search.forEach((movie) => {
+              let img = document.createElement("img");
+              img.setAttribute("src", movie.Poster);
+              img.style.width = "150px";
+              img.style.margin = "10px";
+              document.body.appendChild(img);
+            });
+          } else {
+            alert("No movies found!");
+          }
+        })
+        .catch(err => console.error("Error:", err));
+    }
+  </script>
+
+</body>
+</html>

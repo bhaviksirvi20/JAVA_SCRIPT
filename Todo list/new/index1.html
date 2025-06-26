@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="inputa" placeholder="Enter The value....." />
+  <button onclick="p()">click</button>
+  <button onclick="clearAll()">clear</button>
+  <ul id="ul"> </ul>
+
+  <script>
+    let arrtodo = [];
+    var ul = document.getElementById("ul");
+
+    function p() {
+      let userInput = document.getElementById("inputa").value;
+
+      let input2 = document.getElementById("inputa").value = ""
+
+
+      if (userInput != "") {
+        arrtodo.push(userInput);
+        ul.innerHTML += `<li id="bhavik">${userInput}</li>`;
+        localStorage.setItem("todo", JSON.stringify(arrtodo));
+      }
+
+      else {
+        alert("Enter The Input....")
+      }
+    }
+    
+    let getter = JSON.parse(localStorage.getItem("todo"));
+    
+    if (getter) {
+      arrtodo = getter
+      arrtodo.forEach((b) => {
+        ul.innerHTML += `<li>${b}</li>`;
+      })
+    }
+
+    function clearAll() {
+      localStorage.clear()
+      ul.innerHTML = ""
+      arrtodo = []
+    }
+  </script>
+</body>
+
+</html>

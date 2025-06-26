@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do List App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f0f2f5;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .add-btn {
+      background-color: #28a745;
+    }
+
+    .add-btn:hover {
+      background-color: #218838;
+    }
+
+    .clear-btn {
+      background-color: #dc3545;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .clear-btn:hover {
+      background-color: #c82333;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      background: #e9ecef;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .actions {
+      display: flex;
+      gap: 5px;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .edit-btn {
+      color: #007bff;
+    }
+
+    .delete-btn {
+      color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>My To-Do List</h2>
+    <div class="input-group">
+      <input type="text" id="inputa" placeholder="Enter a task..." />
+      <button class="btn add-btn" onclick="p()">Add</button>
+    </div>
+    <ul id="ul"></ul>
+  </div>
+
+  <script>
+    let arrtodo = [];
+    var ul = document.getElementById("ul");
+
+    function renderList() {
+      ul.innerHTML = "";
+      arrtodo.forEach((task, index) => {
+        ul.innerHTML += `
+          <li>
+            <span>${task}</span>
+            <div class="actions">
+              <button class="action-btn edit-btn" onclick="editTask(${index})">✏️</button>
+              <button class="action-btn delete-btn" onclick="deleteTask(${index})">🗑️</button>
+            </div>
+          </li>`;
+      });
+    }
+
+    function p() {
+      let userInput = document.getElementById("inputa").value;
+      document.getElementById("inputa").value = "";
+
+      if (userInput !== "") {
+        arrtodo.push(userInput);
+        localStorage.setItem("todo", JSON.stringify(arrtodo));
+        renderList();
+      } else {
+        alert("Enter The Input....");
+      }
+    }
+
+    function deleteTask(index) {
+      arrtodo.splice(index, 1);
+      localStorage.setItem("todo", JSON.stringify(arrtodo));
+      renderList();
+    }
+
+    function editTask(index) {
+      let newValue = prompt("Edit your task:", arrtodo[index]);
+      if (newValue !== null && newValue.trim() !== "") {
+        arrtodo[index] = newValue.trim();
+        localStorage.setItem("todo", JSON.stringify(arrtodo));
+        renderList();
+      }
+    }
+
+    function clearAll() {
+      if (confirm("Are you sure you want to clear all tasks?")) {
+        localStorage.clear();
+        ul.innerHTML = "";
+        arrtodo = [];
+      }
+    }
+
+    // Load from localStorage
+    let getter = JSON.parse(localStorage.getItem("todo"));
+    if (getter) {
+      arrtodo = getter;
+      renderList();
+    }
+  </script>
+</body>
+</html>
