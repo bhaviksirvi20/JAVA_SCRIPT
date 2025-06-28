@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(to right, #74ebd5, #9face6);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .weather-container {
+        background-color: #fff;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 450px;
+        text-align: center;
+      }
+
+      .weather-container h1 {
+        color: #333;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+
+      .weather-container h1 i {
+        margin-right: 8px;
+        color: #007bff;
+      }
+
+      .search-section {
+        display: flex;
+        margin-bottom: 1.5rem;
+        gap: 10px;
+      }
+
+      .search-section input {
+        flex: 1;
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 1rem;
+      }
+
+      .search-section button {
+        padding: 0.75rem 1rem;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        transition: background-color 0.3s;
+      }
+
+      .search-section button:hover {
+        background-color: #0056b3;
+      }
+
+      .weather-info .location h2 {
+        font-size: 1.1rem;
+        color: #444;
+        margin-bottom: 10px;
+      }
+
+      .weather-info .location i {
+        color: #e74c3c;
+        margin-right: 5px;
+      }
+
+      .date-time p {
+        font-size: 0.95rem;
+        color: #555;
+        margin-bottom: 1rem;
+      }
+
+      .date-time i {
+        color: #6c757d;
+        margin-right: 5px;
+      }
+
+      .temperature {
+        font-size: 2.5rem;
+        color: #007bff;
+        font-weight: bold;
+      }
+
+      .temperature i {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        color: #ff5722;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="weather-container">
+      <h1><i class="fas fa-cloud-sun"></i> Weather Forecast</h1>
+
+      <div class="search-section">
+        <input type="text" id="cityInput" placeholder="Enter city name..." />
+        <button onclick="btns()"><i class="fas fa-search"></i></button>
+      </div>
+
+      <div class="weather-info">
+        <div class="location">
+          <h2>
+            <i class="fas fa-map-marker-alt"></i>
+            <span id="city">City</span>, <span id="region">Region</span>,
+            <span id="country">Country</span>
+          </h2>
+        </div>
+
+        <div class="date-time">
+          <p>
+            <i class="fas fa-clock"></i> <span id="dateTime">Date & Time</span>
+          </p>
+        </div>
+
+        <div class="temperature">
+          <i id="weatherIcon" class="fas fa-question-circle"></i>
+          <h3 id="temp">25°C</h3>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function btns() {
+        let inputs = document.getElementById("cityInput").value;
+
+        fetch(
+          `https://api.weatherapi.com/v1/current.json?key=29a0822eade6429dbd793815252606&q=${inputs}&aqi=no`
+        )
+          .then((req) => req.json())
+          .then((res) => {
+            document.getElementById("city").innerText = res.location.name;
+            document.getElementById("region").innerText = res.location.region;
+            document.getElementById("country").innerText = res.location.country;
+            document.getElementById("dateTime").innerText = res.location.localtime;
+            document.getElementById("temp").innerText = `${res.current.temp_c}°C`;
+
+            let condition = res.current.condition.text.toLowerCase();
+            let icon = document.getElementById("weatherIcon");
+
+            if (condition.includes("rain")) {
+              icon.className = "fas fa-cloud-showers-heavy";
+            } else if (condition.includes("snow")) {
+              icon.className = "fas fa-snowflake";
+            } else if (condition.includes("cloud")) {
+              icon.className = "fas fa-cloud";
+            } else if (condition.includes("sun") || condition.includes("clear")) {
+              icon.className = "fas fa-sun";
+            } else if (condition.includes("mist") || condition.includes("fog")) {
+              icon.className = "fas fa-smog";
+            } else if (condition.includes("thunder")) {
+              icon.className = "fas fa-bolt";
+            } else {
+              icon.className = "fas fa-cloud-sun";
+            }
+          })
+          .catch(() => {
+            alert("City not found. Please try again.");
+          });
+      }
+    </script>
+  </body>
+</html>

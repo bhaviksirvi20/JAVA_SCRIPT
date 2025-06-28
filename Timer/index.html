@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer</title>
+  </head>
+  <body>
+        <input type="text" id="day" placeholder="Enter The day" />
+        <input type="text" id="hours" placeholder="Enter The hours" /> 
+        <input type="text" id="minits" placeholder="Enter The min" /> 
+    <input type="text" id="sec" placeholder="Enter The sec" />
+    <h1 id="aval">Time</h1>
+    <button onclick="watch()">Watch</button>
+
+    <script>
+      function watch() {
+        let day = document.getElementById("day").value;
+        let hours = document.getElementById("hours").value;
+        let minits = document.getElementById("minits").value;
+        let sec = document.getElementById("sec").value;
+
+        let aval = document.getElementById("aval");
+
+        
+        setInterval(() => {
+
+            
+            if( day > 0 && hours == 0 && minits == 0 && sec == 0 ){
+                hours = 24  
+                day--
+            }
+            if( hours > 0 && minits == 0 && sec == 0 ){
+                minits = 60
+                hours--
+            }
+            if( minits > 0 && sec == 0 ){
+                sec = 60
+                minits--
+            }
+            if(sec >= 0){
+                aval.innerText = `${day} : ${hours} : ${minits} : ${sec}`
+                sec--
+            }
+        }, 1);
+
+
+      }
+    </script>
+  </body>
+</html>

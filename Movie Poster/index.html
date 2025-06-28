@@ -1,139 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Movie Cards - Dark Mode</title>
   <style>
-    :root {
-      --bg-color: #0f0f0f;
-      --text-color: #ffffff;
-      --card-bg: #1c1c1c;
-      --accent: #00ffff;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      padding: 20px;
-      transition: background 0.3s, color 0.3s;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      padding: 30px 20px;
+      color: white;
     }
 
-    input[type="text"] {
-      background-color: var(--card-bg);
-      color: var(--text-color);
-      border: 1px solid #333;
-      border-radius: 8px;
-      padding: 12px;
+    /* Simple header */
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      color: #4ecdc4;
+      margin-bottom: 10px;
+    }
+
+    /* Search input */
+    #inputs {
       width: 100%;
       max-width: 500px;
-      margin: 0 auto 30px auto;
+      margin: 0 auto 40px;
       display: block;
+      padding: 15px 20px;
       font-size: 16px;
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.15);
-      transition: box-shadow 0.3s ease;
-    }
-
-    input[type="text"]:focus {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 25px;
+      color: white;
       outline: none;
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+      transition: all 0.3s ease;
     }
 
-    input[type="text"]::placeholder {
-      color: #aaa;
+    #inputs:focus {
+      border-color: #4ecdc4;
+      box-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
     }
 
+    #inputs::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Movie cards container */
     #imags-c {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-      padding: 10px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .card {
-      background-color: var(--card-bg);
-      color: var(--text-color);
-      border-radius: 12px;
-      padding: 15px;
-      box-shadow: 0 0 12px rgba(0, 255, 255, 0.1),
-                  0 4px 15px rgba(0, 255, 255, 0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    /* Movie card styling */
+    .movie-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3),
-                  0 8px 25px rgba(0, 255, 255, 0.15);
+    .movie-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     }
 
-    .card img {
+    /* Movie poster */
+    .movie-card img {
       width: 100%;
-      border-radius: 10px;
+      height: 350px;
+      object-fit: cover;
     }
 
-    .title {
-      font-size: 18px;
+    /* Movie info section */
+    .movie-info {
+      padding: 20px;
+    }
+
+    .movie-title {
+      font-size: 1.3rem;
       font-weight: bold;
+      margin-bottom: 12px;
+      color: #4ecdc4;
+      line-height: 1.3;
     }
 
-    .subtitle,
-    .section {
-      font-size: 14px;
-      line-height: 1.4;
+    /* Movie details container - normal text styling */
+    .movie-details {
+      margin-bottom: 8px;
     }
 
-    .section strong {
-      color: var(--accent);
+    .movie-year {
+      color: #ff6b6b;
+      font-weight: 600;
+      font-size: 1rem;
     }
 
-    @media (max-width: 600px) {
-      input[type="text"] {
-        font-size: 14px;
+    .movie-type {
+      color: #45b7d1;
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      margin-left: 15px;
+    }
+
+    .movie-id {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.85rem;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    /* Add some spacing between details */
+    .movie-year::before {
+      content: "📅 ";
+      margin-right: 5px;
+    }
+
+    .movie-type::before {
+      content: "🎭 ";
+      margin-right: 5px;
+    }
+
+    .movie-id::before {
+      content: "🔗 ";
+      margin-right: 5px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      #imags-c {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
       }
-      .card {
-        font-size: 13px;
+      
+      .movie-card img {
+        height: 300px;
+      }
+
+      .movie-title {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #imags-c {
+        grid-template-columns: 1fr;
+      }
+
+      .movie-type {
+        margin-left: 0;
+        display: block;
+        margin-top: 5px;
       }
     }
   </style>
 </head>
 
 <body>
-  <input
-    type="text"
-    id="inputs"
-    oninput="movie()"
-    placeholder="Enter Movie Name..."
-  />
+  <div class="header">
+    <h1>🎬 Movie Search</h1>
+    <p>Search your favorite movies</p>
+  </div>
+  
+  <input type="text" id="inputs" oninput="movie()" placeholder="Enter Movie Name..." />
   <div id="imags-c"></div>
 
   <script>
     function movie() {
       let inputs = document.getElementById("inputs").value;
-      let imgs = document.getElementById("imags-c");
-      imgs.innerHTML = "";
+      let imgContainer = document.getElementById("imags-c");
+      imgContainer.innerHTML = "";
 
-      fetch(`http://www.omdbapi.com/?s=${inputs}&apikey=2f3df54`)
+      fetch(`https://www.omdbapi.com/?s=${inputs}&apikey=2f3df54`)
         .then((req) => req.json())
         .then((res) => {
-            res.Search.forEach((e) => {
-              imgs.innerHTML += `
-                <div class="card">
-                  <img src="${e.Poster}" alt="${e.Title}" />
-                  <div class="title">${e.Title}</div>
-                  <div class="subtitle">${e.Year}</div>
-                  <div class="subtitle">${e.Director}</div>
-                  <div class="subtitle">${e.Plot}</div>
-                  
-                  
+          res.Search.forEach((e) => {
+            
+            // नया code - innerHTML के साथ complete card बनाता है
+            // Movie card का HTML template बनाया - अब buttons नहीं, normal text
+            let movieCardHTML = `
+              <div class="movie-card">
+                <img src="${e.Poster !== 'N/A' ? e.Poster : 'https://via.placeholder.com/300x350/333/999?text=No+Image'}" 
+                     alt="${e.Title}" />
+                <div class="movie-info">
+                  <h3 class="movie-title">${e.Title}</h3>
+                  <div class="movie-details">
+                    <span class="movie-year">${e.Year}</span>
+                    <span class="movie-type">${e.Type}</span>
+                  </div>
+                  <div class="movie-id">IMDB: ${e.imdbID}</div>
                 </div>
-              `;
-            });
+              </div>
+            `;
+            
+            // innerHTML का use करके card add किया
+            imgContainer.innerHTML += movieCardHTML;
+          });
         });
     }
   </script>
 </body>
+
 </html>
