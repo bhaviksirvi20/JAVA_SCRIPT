@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      padding: 0px;
+      margin: 0px;
+      box-sizing: border-box;
+    }
+    .container {
+      height: 100vh;
+      width: 100%;
+      background-color: blue;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 100px;
+    }
+    .count {
+      padding: 10px 100px;
+      border: 2px solid white;
+      font-size: 100px;
+      color: antiquewhite;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="count" data-bhavik="10000">0</div>
+      <div class="count" data-bhavik="15000">0</div>
+      <div class="count" data-bhavik="25000">0</div>
+    </div>
+
+    <script>
+      let count = document.querySelectorAll(".count");
+      count.forEach((e) => {
+        let target = +e.dataset.bhavik;
+        //   console.log(target);
+        let a = 0 
+        let speed = 200;
+        let avg = target / speed;
+        console.log(avg);
+
+        setInterval(() => {
+          if (a < target) {
+            a += avg;
+            e.innerText = a;
+          }
+        }, 10);
+      });
+    </script>
+  </body>
+</html>

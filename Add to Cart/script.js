@@ -70,6 +70,28 @@ let array = [
     image:
       "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
   },
+  {
+    category: "Smart Watches",
+    title: "Apple Watch Series 8 (GPS, 45mm)",
+    currentPrice: 399.99,
+    originalPrice: 429.99,
+    rating: 4.5,
+    ratingCount: 142,
+    badge: "Sale",
+    image:
+      "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    category: "Headphones",
+    title: "Sony WH-1000XM5 Wireless",
+    currentPrice: 349.99,
+    originalPrice: null,
+    rating: 5,
+    ratingCount: 256,
+    badge: "New",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+  }
 ];
 
 for (let i = 0; i < array.length; i++) {
