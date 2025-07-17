@@ -1,75 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Image Slider</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="slider-container">
-      <div class="slider" id="tops">
-        <img
-          class="slide"
-          src="https://images5.alphacoders.com/109/1099869.jpg"
-          alt="Image 1"
-        />
-        <img
-          class="slide"
-          src="https://wallpapercave.com/wp/wp2720655.jpg"
-          alt="Image 2"
-        />
-        <img
-          class="slide"
-          src="https://w0.peakpx.com/wallpaper/73/770/HD-wallpaper-waterfall-forest-lake-landscape-nature-river-sea-thumbnail.jpg"
-          alt="Image 3"
-        />
-        <img
-          class="slide"
-          src="https://wallpapercave.com/wp/f8lfDGj.jpg"
-          alt="Image 4"
-        />
-        <img
-          class="slide"
-          src="https://wallpapercave.com/wp/wp2033252.jpg"
-          alt="Image 5"
-        />
-        <img
-          class="slide"
-          src="https://cdn.wallpapersafari.com/56/69/xUP0bY.jpg"
-          alt="Image 6"
-        />
-      </div>
 
-      <div class="controls">
-        <button id="prev" onclick="privous()">⬅ Previous</button>
-        <button id="next" onclick="next()">Next ➡</button>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Slider</title>
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<style>
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e9f5f0;
+  font-family: Arial, sans-serif;
+}
+
+.slider-container {
+  width: 600px;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  background: #fff;
+}
+
+.slider {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+
+.controls {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.controls button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  background: #000;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.controls button:hover {
+  background: #fff;
+  color: #000;
+  border: 2px solid #000;
+}
+
+</style>
+
+<body>
+  <div class="slider-container">
+    <div class="slider" id="tops">
+      <img src="https://images5.alphacoders.com/109/1099869.jpg" alt="Image 1" />
+      <img src="https://wallpapercave.com/wp/wp2720655.jpg" alt="Image 2" />
+      <img src="https://w0.peakpx.com/wallpaper/73/770/HD-wallpaper-waterfall-forest-lake-landscape-nature-river-sea-thumbnail.jpg"  alt="Image 3" />
+      <img src="https://wallpapercave.com/wp/f8lfDGj.jpg" alt="Image 4" />
+      <img src="https://wallpapercave.com/wp/wp2033252.jpg" alt="Image 5" />
+      <img src="https://cdn.wallpapersafari.com/56/69/xUP0bY.jpg" alt="Image 6" />
     </div>
 
-    <script>
-      let count = 0;
-      const slides = document.querySelectorAll(".slide");
+    <div class="controls">
+      <button id="prev" onclick="privous()">⬅ Previous</button>
+      <button id="next" onclick="next()">Next ➡</button>
+    </div>
+  </div>
 
-      slides.forEach((slide, index) => {
-        slide.style.left = `${index * 100}%`;
-      });
+  <script>
+  let count = 0;
+  let slides = document.getElementById("tops");
+  let images = slides.querySelectorAll("img");
 
-      function user() {
-        slides.forEach((slide) => {
-          slide.style.transform = `translateX(-${count * 100}%)`;
-        });
-      }
+  function slide() {
+    slides.style.transform = `translateX(-${count * 100}%)`;
+  }
 
-      function next() {
-        count++;
-        user();
-      }
+  function next() {
+    if (count < images.length - 1) {
+      count++;
+    }
+    slide();
+  }
 
-      function privous() {
-        count--;
-        user();
-      }
-    </script>
-  </body>
+  function privous() {
+    if (count > 0) {
+      count--;
+    }
+    slide();
+  }
+</script>
+
+</body>
+
 </html>
