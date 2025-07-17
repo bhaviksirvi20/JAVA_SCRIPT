@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <span id="hours">00</span>
+    <span>:</span>
+    <span id="min">00</span>
+    <span>:</span>
+    <span id="sec">00</span>
+    <span id="ampm">AM</span>
+
+    <script>
+        let hours = document.getElementById("hours")
+        let min = document.getElementById("min")
+        let sec = document.getElementById("sec")
+
+        let ampm = document.getElementById("ampm")
+
+        setInterval(() => {
+
+            let curent = new Date()
+
+               let h = curent.getHours()
+               let m = curent.getMinutes()
+               let s = curent.getSeconds()
+
+
+            let morning = "AM"
+
+            if (h >= 12) {
+                morning = "PM"
+            }
+            hours.innerText = h
+            min.innerText = m
+            sec.innerText = s
+            ampm.innerText = morning
+
+        }, 10);
+    </script>
+</body>
+
+</html>
