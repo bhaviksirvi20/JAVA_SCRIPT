@@ -61,7 +61,7 @@
                     productCard.innerHTML = `
                         <div class="product-image">
                             <img src="${product.imageUrl}" alt="${product.title}">
-                            ${product.badge ? `<div class="product-badge ${product.badge}">${product.badge === 'sale' ? '-20%' : product.badge}</div>` : ''}
+                            ${product.badge ? `<div class="product-badge ${product.badge}">${product.badge === 'sale' ? '-15%' : product.badge}</div>` : ''}
                             <div class="product-actions">
                                 <button class="action-btn"><i class="fas fa-heart"></i></button>
                                 <button class="action-btn"><i class="fas fa-eye"></i></button>
@@ -94,7 +94,17 @@
             .catch(error => console.error('Error loading products:', error));
 
         function addtocart(a) {
-            allproducts.push(alldata[a])
+            product = alldata[a]
+
+            let found = allproducts.find((a) => a.id == product.id)
+            if (found) {
+                found.qty += 1
+                alert("all ready exist")
+            }
+            else{
+                product.qty = 1
+                allproducts.push(product)
+            }
             localStorage.setItem("setmydata", JSON.stringify(allproducts))
         }
     </script>

@@ -118,7 +118,6 @@
         let items = document.getElementById("total-items-count")
         let summary = document.getElementById("summary-item-count")
 
-
         for (let i = 0; i < dataget.length + 1; i++) {
             items.innerText = i
             summary.innerText = i
@@ -148,14 +147,14 @@
                     <div class="item-quantity" id="item-quantity-section-0">
                         <label id="qty-label-0">Qty:</label>
                         <div class="quantity-controls" id="qty-controls-0">
-                            <button class="qty-btn minus" onclick="decrement(0)" id="decrease-btn-0">-</button>
-                            <input id="quantity0" value="1" min="1">
-                                <button class="qty-btn plus" onclick="increment(0)" id="increase-btn-0">+</button>
+                            <button class="qty-btn minus" onclick="decrement(${i})" id="decrease-btn-0">-</button>
+                            <input id="quantity${i}" value="${e.qty}" min="1">
+                                <button class="qty-btn plus" onclick="increment(${i})" id="increase-btn-0">+</button>
                         </div>
                     </div>
                     <div class="item-price" id="item-price-section-0">
-                        <span class="current-price" id="price0">${e.price}</span>
-                        <span id="unit-price-0">${e.price}</span>
+                        <span class="current-price" id="price${i}">${e.price * e.qty}</span>
+                        <span id="unit-price-${i}">${e.price}</span>
                     </div>
                     <div class="item-actions" id="item-actions-0">
                         <button class="remove-btn" id="remove-btn-0" oncilck="deletedata(${e.id})">
@@ -165,27 +164,39 @@
                 </div>
                 `
 
-
-
-
         });
 
 
-        // let quantity0 = document.getElementById("quantity0")
-        // let add = 1
-        // function increment() {
-        //     add++
-        //     quantity0.value = add
-        // }
-        // function decrement() {
-        //     if (add > 1) {
-        //         add--
-        //         quantity0.value = add
-        //     }
-        // }
+        function increment(a) {
+            let quantity = document.getElementById(`quantity${a}`)
+            let val = +quantity.value
+            let price = document.getElementById(`price${a}`)
+            let current = +document.getElementById(`unit-price-${a}`).innerText
 
+            if (val < 20) {
+                val++
+                dataget[a].qty = val
+                quantity.value = val
+            }
+            price.innerText = `${(current * val)}`
+            localStorage.setItem("setmydata", JSON.stringify(dataget))
 
-        console.log(dataget);
+        }
+        function decrement(a) {
+            let quantity = document.getElementById(`quantity${a}`)
+            let val = +quantity.value
+            let price = document.getElementById(`price${a}`)
+            let current = +document.getElementById(`unit-price-${a}`).innerText
+
+            if (val > 1) {
+                val--
+                dataget[a].qty = val
+                quantity.value = val
+            }
+            price.innerText = `${(current * val)}`
+            localStorage.setItem("setmydata", JSON.stringify(dataget))
+        }
+
 
         function deletedata(a) {
             let index = dataget.findIndex(a)

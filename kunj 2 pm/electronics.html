@@ -46,23 +46,22 @@
     </section>
 
     <script>
-        let alldata = []
+         let alldata = []
         let allproducts = JSON.parse(localStorage.getItem(`setmydata`)) || [];
         // Load products from JSON
-        fetch('./data/electronics.json')
+            fetch('./data/electronics.json')
             .then(response => response.json())
-            .then((products, i) => {
+            .then((products,i) => {
                 const productsGrid = document.getElementById('products-grid');
                 alldata = products
-
-                products.forEach((product, i) => {
+                products.forEach((product,i) => {
                     const productCard = document.createElement('div');
                     productCard.className = 'product-card';
-
+                    
                     productCard.innerHTML = `
                         <div class="product-image">
                             <img src="${product.imageUrl}" alt="${product.title}">
-                            ${product.badge ? `<div class="product-badge ${product.badge}">${product.badge === 'sale' ? '-25%' : product.badge}</div>` : ''}
+                            ${product.badge ? `<div class="product-badge ${product.badge}">${product.badge === 'sale' ? '-15%' : product.badge}</div>` : ''}
                             <div class="product-actions">
                                 <button class="action-btn"><i class="fas fa-heart"></i></button>
                                 <button class="action-btn"><i class="fas fa-eye"></i></button>
@@ -88,18 +87,26 @@
                             </button>
                         </div>
                     `;
-
+                    
                     productsGrid.appendChild(productCard);
                 });
             })
             .catch(error => console.error('Error loading products:', error));
 
+            function addtocart(a){
+                product = alldata[a]
+                let found = allproducts.find((a)=> a.id == product.id)
+                if (found) {
+                    found.qty += 1
+                    alert("all ready exits")
+                    
+                }else{
+                    product.qty = 1
+                    allproducts.push(product)
+                }
+                localStorage.setItem("setmydata",JSON.stringify(allproducts))
 
-
-        function addtocart(a) {
-            allproducts.push(alldata[a])
-            localStorage.setItem("setmydata", JSON.stringify(allproducts))
-        }
+            }
     </script>
 </body>
 

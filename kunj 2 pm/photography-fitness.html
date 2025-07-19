@@ -90,8 +90,17 @@
             })
             .catch(error => console.error('Error loading products:', error));
 
-            function addtocart(a){
-                allproducts.push(alldata[a])
+            function addtocart(a) {
+                product = alldata[a]
+                let found = allproducts.find((a) => a.id == product.id)                
+                if(found){
+                    found.qty += 1
+                    alert("all ready exist")
+                }
+                else{
+                    product.qty = 1
+                    allproducts.push(product)
+                }
                 localStorage.setItem("setmydata",JSON.stringify(allproducts))
             }
     </script>
