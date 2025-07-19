@@ -126,7 +126,7 @@
         dataget.forEach((e, i) => {
 
             container.innerHTML += `
-                <div class="cart-item" id="cart-item-0">
+                <div class="cart-item" id="cart-item-${i}">
                     <div class="item-image" id="item-image-0">
                         <img src="${e.imageUrl}" alt="Wireless Earbuds Pro" id="item-img-0">
                     </div>
@@ -156,8 +156,8 @@
                         <span class="current-price" id="price${i}">${e.price * e.qty}</span>
                         <span id="unit-price-${i}">${e.price}</span>
                     </div>
-                    <div class="item-actions" id="item-actions-0">
-                        <button class="remove-btn" id="remove-btn-0" oncilck="deletedata(${e.id})">
+                    <div class="item-actions" id="item-actions-${i}">
+                        <button class="remove-btn" id="remove-btn-${i}" onclick="deletedata(${i})">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -166,6 +166,11 @@
 
         });
 
+        function deletedata(index) {
+            dataget.splice(index, 1);
+            localStorage.setItem("setmydata", JSON.stringify(dataget));
+            location.reload();
+        }
 
         function increment(a) {
             let quantity = document.getElementById(`quantity${a}`)
@@ -187,7 +192,7 @@
             let val = +quantity.value
             let price = document.getElementById(`price${a}`)
             let current = +document.getElementById(`unit-price-${a}`).innerText
-
+            
             if (val > 1) {
                 val--
                 dataget[a].qty = val
@@ -196,12 +201,13 @@
             price.innerText = `${(current * val)}`
             localStorage.setItem("setmydata", JSON.stringify(dataget))
         }
+        
+        // aama amount add karva ni che and gst chenge kari ne aatyare khali emnam fix aapi deje and e khali add kari nakh je dynemic karvu hoy to tari icha and e add kari ne niche last ma total amount batavi deje 
+        let totalAmount = document.getElementById("subtotal-amount")
+        totalAmount.innerText = `add total amount`
 
+       
 
-        function deletedata(a) {
-            let index = dataget.findIndex(a)
-            dataget.splice(index, 1)
-        }
 
         // Log all cart elements for reference
         console.log('Cart page loaded with 4 items');
