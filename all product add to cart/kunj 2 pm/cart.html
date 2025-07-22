@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shopping Cart - TechHub</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="main-navbar">
+    <div class="container">
+      <div class="nav-content" id="nav-content">
+        <div class="logo" id="site-logo">
+          <h2>TechHub</h2>
+        </div>
+        <div class="nav-links" id="navigation-links">
+          <a href="electronics.html" id="electronics-link">Electronics</a>
+          <a href="audio-gaming.html" id="audio-gaming-link">Audio & Gaming</a>
+          <a href="photography-fitness.html" id="photography-fitness-link">Photography & Fitness</a>
+          <a href="cart.html" class="cart-btn active" id="cart-link">
+            <i class="fas fa-shopping-cart"></i> Cart
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <section class="breadcrumb" id="breadcrumb-section">
+    <div class="container">
+      <div class="breadcrumb-nav" id="breadcrumb-navigation">
+        <a href="electronics.html" id="home-breadcrumb"><i class="fas fa-home"></i> Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <span id="current-page-breadcrumb">Shopping Cart</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart Section -->
+  <section class="cart-section" id="main-cart-section">
+    <div class="container">
+      <h1 class="page-title" id="cart-page-title">Shopping Cart</h1>
+      <div class="cart-layout" id="cart-main-layout">
+        <!-- Cart Items -->
+        <div class="cart-items" id="cart-items-container">
+          <div class="cart-header" id="cart-items-header">
+            <h2 id="cart-items-title">Your Items (<span id="total-items-count">0</span>)</h2>
+          </div>
+        </div>
+
+        <!-- Cart Summary -->
+        <div class="cart-summary" id="cartScontainer"></div>
+      </div>
+
+      <div class="continue-shopping" id="continue-shopping-section">
+        <a href="electronics.html" class="continue-btn" id="continue-shopping-btn">
+          <i class="fas fa-arrow-left"></i> Continue Shopping
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    window.onload = function () {
+      let container = document.getElementById("cart-items-container");
+      let dataget = JSON.parse(localStorage.getItem("setmydata")) || [];
+      let itemsCount = document.getElementById("total-items-count");
+
+      if (dataget.length === 0) {
+        container.innerHTML += `<p>Your cart is empty.</p>`;
+        document.getElementById("cartScontainer").style.display = "none";
+        return;
+      }
+
+      itemsCount.innerText = dataget.length;
+
+      dataget.forEach((e, i) => {
+        container.innerHTML += `
+          <div class="cart-item" id="cart-item-${i}">
+            <div class="item-image"><img src="${e.imageUrl}" alt="${e.title}"/></div>
+            <div class="item-details">
+              <h3>${e.title}</h3>
+              <p class="item-category">${e.category}</p>
+              <div class="item-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <span>${e.rating}</span>
+              </div>
+            </div>
+            <div class="item-quantity">
+              <label>Qty:</label>
+              <div class="quantity-controls">
+                <button class="qty-btn minus" onclick="decrement(${i})">-</button>
+                <input id="quantity${i}" value="${e.qty}" min="1"/>
+                <button class="qty-btn plus" onclick="increment(${i})">+</button>
+              </div>
+            </div>
+            <div class="item-price">
+              <span class="current-price" id="price${i}">${(e.price * e.qty).toFixed(2)}</span>
+              <span id="unit-price-${i}" style="display:none">${e.price}</span>
+            </div>
+            <div class="item-actions">
+              <button class="remove-btn" onclick="deletedata(${i})"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>`;
+      });
+
+      document.getElementById("cartScontainer").innerHTML = `
+        <div class="summary-card">
+          <h3>Order Summary</h3>
+          <div class="summary-row">
+            <span>Subtotal (<span id="summary-item-count-summary">${dataget.length}</span> items)</span>
+            <span id="subtotal-amount"></span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span class="free">Free</span>
+          </div>
+          <div class="summary-row">
+            <span>Tax</span>
+            <span id="tax-amount"></span>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span id="total-amount"></span>
+          </div>
+          <div class="promo-code">
+            <input type="text" placeholder="Enter promo code" id="promo"/>
+            <button class="apply-btn" onclick="apply()">Apply</button>
+          </div>
+          <button class="checkout-btn">
+            <i class="fas fa-lock"></i> Proceed to Checkout
+          </button>
+          <div class="payment-methods">
+            <p>We accept:</p>
+            <div class="payment-icons">
+              <i class="fab fa-cc-visa"></i>
+              <i class="fab fa-cc-mastercard"></i>
+              <i class="fab fa-cc-paypal"></i>
+              <i class="fab fa-apple-pay"></i>
+            </div>
+          </div>
+        </div>`;
+
+      summary();
+    };
+    function apply(){
+        let promo = document.getElementById("promo").value 
+        console.log(promo);
+
+        alert(`Successfully perchesh... ${promo}`)
+        let cardmain = document.getElementById("cart-main-layout").innerHTML = ""
+
+    }
+    
+
+    function increment(i) {
+      let dataget = JSON.parse(localStorage.getItem("setmydata")) || [];
+      let quantity = document.getElementById(`quantity${i}`);
+      let val = +quantity.value;
+      let unit = +document.getElementById(`unit-price-${i}`).innerText;
+
+      if (val < 20) {
+        val++;
+        dataget[i].qty = val;
+        quantity.value = val;
+        document.getElementById(`price${i}`).innerText = (unit * val).toFixed(2);
+        localStorage.setItem("setmydata", JSON.stringify(dataget));
+        summary();
+      }
+    }
+
+    function decrement(i) {
+      let dataget = JSON.parse(localStorage.getItem("setmydata")) || [];
+      let quantity = document.getElementById(`quantity${i}`);
+      let val = +quantity.value;
+      let unit = +document.getElementById(`unit-price-${i}`).innerText;
+
+      if (val > 1) {
+        val--;
+        dataget[i].qty = val;
+        quantity.value = val;
+        document.getElementById(`price${i}`).innerText = (unit * val).toFixed(2);
+        localStorage.setItem("setmydata", JSON.stringify(dataget));
+        summary();
+      }
+    }
+
+    function summary() {
+      let dataget = JSON.parse(localStorage.getItem("setmydata")) || [];
+      let subtotal = 0;
+
+      dataget.forEach(item => {
+        subtotal += item.price * item.qty;
+      });
+
+      let tax = subtotal * 0.08;
+      let total = subtotal + tax;
+
+      document.getElementById("subtotal-amount").innerText = `$${subtotal.toFixed(2)}`;
+      document.getElementById("tax-amount").innerText = `$${tax.toFixed(2)}`;
+      document.getElementById("total-amount").innerText = `$${total.toFixed(2)}`;
+    }
+
+    function deletedata(i) {
+      let dataget = JSON.parse(localStorage.getItem("setmydata")) || [];
+      dataget.splice(i, 1);
+      localStorage.setItem("setmydata", JSON.stringify(dataget));
+      location.reload();
+    }
+  </script>
+</body>
+</html>
