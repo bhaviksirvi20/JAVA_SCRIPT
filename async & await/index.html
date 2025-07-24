@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1024px-Unofficial_JavaScript_logo_2.svg.png" type="image/x-icon">
+    <title>async & await</title>
+</head>
+<style>
+    body {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background-color: gray;
+    }
+
+    .main {
+        background: white;
+        padding: 10px 50px;
+        border: 2px solid black;
+    }
+</style>
+
+<body>
+
+    <div class="main">
+
+        <h1 id="aval"></h1>
+        <h1 id="bval"></h1>
+        <h1 id="cval"></h1>
+
+    </div>
+
+    <script>
+
+        let aval = document.getElementById("aval")
+        let bval = document.getElementById("bval")
+        let cval = document.getElementById("cval")
+
+        function bhavik() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve("wait a 1 second");
+                }, 2000)
+            })
+        }
+
+        async function bhavikkk() {
+
+            aval.innerText = "• Welcome! Great to see you here 😊"
+
+            let n = await bhavik();
+            bval.innerText = `• ${n}`
+
+            cval.innerText = "• Thanks for visiting! Take care 👋"
+
+        }
+
+        bhavikkk()
+    </script>
+</body>
+
+</html>

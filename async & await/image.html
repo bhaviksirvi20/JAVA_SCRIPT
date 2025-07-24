@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Async Await UI - Dark Theme</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --card-color: #1f1f2e;
+      --text-color: #e0e0e0;
+      --accent: #8c72ff;
+      --border-radius: 16px;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      background: var(--card-color);
+      border-radius: var(--border-radius);
+      padding: 40px;
+      max-width: 1000px;
+      width: 100%;
+      box-shadow: var(--shadow);
+      transition: all 0.5s ease;
+    }
+
+    .card.switch {
+      flex-direction: row;
+    }
+
+    #image-side img {
+      width: 320px;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    #image-side img:hover {
+      transform: scale(1.05);
+    }
+
+    .content-side {
+      max-width: 600px;
+    }
+
+    .content-side h2 {
+      color: var(--accent);
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      right: 380px;
+    }
+
+    .content-side p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-color);
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .loading {
+      display: flex;
+      align-items: center;
+      font-size: 1.1rem;
+      color: #888;
+    }
+
+    #span {
+      margin-right: 15px;
+      height: 20px;
+      width: 20px;
+      border: 4px solid #444;
+      border-top: 4px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      .card,
+      .card.switch {
+        flex-direction: column-reverse;
+        padding: 30px;
+      }
+
+      #image-side img {
+        width: 100%;
+        max-width: 280px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card" id="container">
+    <div class="content-side" id="content">
+      <p class="loading"><span id="span"></span>Loading content...</p>
+    </div>
+    <div id="image-side">
+    </div>
+  </div>
+
+  <script>
+    async function fetchContent() {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve({
+            title: "Async Content Loaded",
+            text: `
+              This content was loaded asynchronously using async/await in JavaScript. 
+              <br><br>
+              This is useful in modern web apps for dynamically updating UI with API data.
+              <br><br>
+              <strong>Features:</strong>
+              <ul>
+                <li>Async/Await logic</li>
+                <li>Pure dark theme</li>
+                <li>Responsive, centered layout</li>
+                <li>Stylish professional card</li>
+              </ul>
+            `,
+            src: "https://i.pinimg.com/736x/00/58/58/005858eed026e23304b9af2fc90668c3.jpg"
+
+
+          });
+        }, 1000);
+      });
+    }
+
+    async function loadContent() {
+      let data = await fetchContent();
+      let contentEl = document.getElementById('content');
+      let im = document.getElementById("image-side");
+
+      im.innerHTML = `
+        <img src="${data.src}" alt="Async Image">
+      `
+
+      setTimeout(() => {
+        contentEl.innerHTML = `
+          <h2>${data.title}</h2>
+          <p>${data.text}</p>
+        `;
+      }, 2000)
+    }
+
+    loadContent();
+
+
+  </script>
+
+</body>
+
+</html>
