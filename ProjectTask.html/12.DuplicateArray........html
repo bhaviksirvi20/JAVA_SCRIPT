@@ -4,40 +4,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>12. Duplicate Array</title>
+    <title>Document</title>
 </head>
+<style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      text-align: center;
+    }
 
+    input[type="text"],
+    input[type="number"] {
+      background-color: #1e1e1e;
+      color: #fff;
+      border: 1px solid #555;
+      padding: 8px;
+      margin: 6px;
+      border-radius: 6px;
+      width: 180px;
+    }
+
+    button {
+      background-color: #03dac6;
+      color: #000;
+      border: none;
+      padding: 10px 18px;
+      margin: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00bfa5;
+    }
+
+    #inputs {
+      margin-top: 20px;
+    }
+
+    #inputs input {
+      display: inline-block;
+      margin: 6px;
+      width: 100px;
+      text-align: center;
+    }
+
+    #aval {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #1f1f1f;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #03dac6;
+      font-size: 18px;
+    }
+  </style>
 <body>
-    <input type="text" id="user" placeholder="enter value...">
-    <button onclick="press()">Click</button>
-    <div id="inputs"> </div>
-
-
-    <button onclick="ans()">Answer</button>
+    <input type="text" id="user">
+    <button onclick="input()">click</button>
+    <div id="inputs"></div>
+    <button onclick="sort()">Click to Answer</button>
     <h1 id="aval"></h1>
-
     <script>
-        function press() {
-
+        function input() {
             let user = +document.getElementById("user").value
             console.log(user);
             let inputs = document.getElementById("inputs")
-
-            for (let i = 0; i < user; i++) {
-
+            for (let i = 1; i <= user; i++) {
                 let input = document.createElement("input")
                 inputs.appendChild(input)
                 input.type = "number"
-
             }
-            let userr = document.getElementById("user")
-            userr.value = ""
         }
-        function ans() {
-           
+        function sort() {
+            let num = document.querySelectorAll("#inputs input")
+            let arr = []
+            num.forEach((e) => {
+                let val = Number(e.value)
+                arr.push(val)
 
+                console.log(arr);
+            })
+            let l = arr.length
+            for (let i = 0; i < l - 1; i++) {
+                for (let j = 0; j < l - 1 - i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        let temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                }
+            }
+            let aval = document.getElementById("aval")
+            for (let i = 0; i < l; i++) {
+                if(arr[i] == arr[i + 1]){
+                    aval.innerText += ` ${arr[i]} is Repeated in Array `
+                }
+            }
         }
-
     </script>
 </body>
 
